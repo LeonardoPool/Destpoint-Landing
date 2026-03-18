@@ -125,6 +125,19 @@ body {
   color: #111;
 }
 
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.hero-logo {
+  height: 120px;
+  width: auto;
+  display: block;
+  margin-bottom: 1.4rem;
+}
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -682,14 +695,14 @@ body {
 }
 
 .nav-btn--next {
-  border-color: #1a9fd8;
-  background: #1a9fd8;
+  border-color: #184a57;
+  background: #184a57;
   color: #ffffff;
 }
 
 .nav-btn--next:hover {
-  background: #1589c2;
-  border-color: #1589c2;
+  background: #0f3a47;
+  border-color: #0f3a47;
 }
 
 /* Carousel */
@@ -780,7 +793,7 @@ body {
 }
 
 .price-value {
-  color: #1a9fd8;
+  color: #184a57;
   font-weight: 600;
   font-size: 0.9rem;
 }
@@ -916,7 +929,7 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #1a9fd8;
+  background: #184a57;
   color: #ffffff;
   font-weight: 700;
   font-size: 1.1rem;
@@ -1226,7 +1239,7 @@ body {
 }
 
 .resort-price span {
-  color: #1a9fd8;
+  color: #184a57;
   font-weight: 600;
 }
 
@@ -1292,7 +1305,7 @@ body {
   padding: 0.65rem 2rem;
   border: none;
   border-radius: 8px;
-  background: #1a9fd8;
+  background: #184a57;
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
@@ -1302,7 +1315,7 @@ body {
 }
 
 .btn-explore:hover {
-  background: #1589c2;
+  background: #0f3a47;
 }
 
 @media (max-width: 1100px) {
@@ -1404,7 +1417,7 @@ body {
 .footer-logo-name {
   font-size: 1rem;
   font-weight: 700;
-  color: #1a9fd8;
+  color: #184a57;
   letter-spacing: 0.05em;
 }
 
@@ -1449,7 +1462,7 @@ body {
 }
 
 .footer-column a:hover {
-  color: #1a9fd8;
+  color: #184a57;
 }
 
 .footer-social {
@@ -1475,7 +1488,7 @@ body {
 }
 
 .social-link:hover {
-  color: #1a9fd8;
+  color: #184a57;
 }
 
 .social-link svg {
@@ -1516,7 +1529,7 @@ body {
 }
 
 .footer-legal a:hover {
-  color: #1a9fd8;
+  color: #184a57;
 }
 
 @media (max-width: 1100px) {

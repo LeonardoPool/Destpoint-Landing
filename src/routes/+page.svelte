@@ -1,5 +1,6 @@
 <script lang="ts">
 	import subtractImg from '$lib/images/Subtract.png';
+	import logoImg from '$lib/images/logo.png';
 	import travelokaLogo from '$lib/images/empresas/Traveloka logo.svg';
 	import airbnbLogo from '$lib/images/empresas/airbnb logo.svg';
 	import expediaLogo from '$lib/images/empresas/Expedia logo.svg';
@@ -86,12 +87,7 @@
 <!-- ─── Navbar ──────────────────────────────────────────────── -->
 <nav class="navbar">
 	<a href="/" class="logo">
-		<!-- Logo mark: rounded square with "D" + "ESTPOINT" → reads DESTPOINT -->
-		<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<rect x="0.75" y="0.75" width="24.5" height="24.5" rx="4.25" stroke="#111" stroke-width="1.5" />
-			<text x="13" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#111" font-family="sans-serif">D</text>
-		</svg>
-		<span class="logo-name">ESTPOINT</span>
+		<img src={logoImg} alt="Destpoint Logo" class="logo-img" />
 	</a>
 
 	<ul class="nav-links">
@@ -121,9 +117,7 @@
 
 	<!-- Left column -->
 	<div class="hero-left">
-		<h1 class="hero-title">
-			Operadora<br />Mayorista
-		</h1>
+		<img src={logoImg} alt="Destpoint" class="hero-logo" />
 		<p class="hero-desc">
 			Your journey begins here with our curated travel experiences.<br />
 			Discover new horizons, create lasting memories, and explore the<br />
@@ -382,8 +376,8 @@
 			<div class="footer-logo">
 				<!-- Logo mark -->
 				<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<rect x="0.75" y="0.75" width="24.5" height="24.5" rx="4.25" stroke="#1a9fd8" stroke-width="1.5" />
-					<text x="13" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#1a9fd8" font-family="sans-serif">D</text>
+			<rect x="0.75" y="0.75" width="24.5" height="24.5" rx="4.25" stroke="#184a57" stroke-width="1.5" />
+			<text x="13" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#184a57" font-family="sans-serif">D</text>
 				</svg>
 				<span class="footer-logo-name">Destpoint</span>
 			</div>
