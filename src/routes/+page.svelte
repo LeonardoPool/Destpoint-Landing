@@ -129,17 +129,17 @@
 	const features = [
 		{
 			id: 1,
-			title: 'Best Choice',
+			title: 'Producto multidestino sólido',
 			desc: 'We always prioritize our customer comfort and satisfaction. That\'s why we only accept the best hotel and destination'
 		},
 		{
 			id: 2,
-			title: 'Competitive Prices',
+			title: 'Respaldo operativo confiable',
 			desc: 'Although the price tends to be cheaper but it will not affect the quality of service'
 		},
 		{
 			id: 3,
-			title: 'Refund and Reschedule',
+			title: 'Relaciones estratégicas sostenibles',
 			desc: 'Don\'t worry if suddenly you have problem and want to reschedule or refund, you can get fully.'
 		}
 	];
@@ -166,12 +166,11 @@
 	<!-- Left column -->
 	<div class="hero-left">
 		<h1 class="hero-title">
-			La nueva forma de conectar agencias de viajes<br />
-			con el Mundo Maya
+			Conectando agencias de viajes con el Mundo Maya
 		</h1>
 		<p class="hero-desc">
-			Operadora mayorista B2B especializada en productos multidestino<br />
-			en México y Centroamérica, con estructura real, disponibilidad y<br />
+			Operadora mayorista B2B especializada en productos multidestino
+			en México y Centroamérica, con estructura real, disponibilidad y
 			respaldo operativo.
 		</p>
 
@@ -335,9 +334,9 @@
 	<div class="why-us-container">
 		<!-- Left column -->
 		<div class="why-us-left">
-			<h2 class="why-us-title">Embark On Unforgettable Journeys With Our Premium Travel Services</h2>
+			<h2 class="why-us-title">Convertimos destinos en producto vendible</h2>
 			<p class="why-us-desc">
-				Picture-perfect getaways are just a click away. Find your slice of paradise, whether it's a tropical island, a charming city, or an enchanting countryside retreat.
+				Integramos hotelería, transporte y experiencias para crear productos turísticos estructurados, listos para comercializarse de forma eficiente por agencias de viajes.
 			</p>
 
 			<div class="features-list">
@@ -364,7 +363,7 @@
 				</div>
 				<div>
 					<p class="customers-count">10K+</p>
-					<p class="customers-label">Satisfied Customer</p>
+					<p class="customers-label">Alianzas comerciales</p>
 				</div>
 			</div>
 
@@ -420,9 +419,9 @@
 
 		<!-- Right column -->
 		<div class="explore-right">
-			<h2 class="explore-title">With Our Service We Will Explore Something Different</h2>
+			<h2 class="explore-title">Únete a la red de agencias Destpoint</h2>
 			<p class="explore-desc">
-				Uncover hidden gems and immerse yourself in vibrant cultures. From breathtaking landscapes to awe-inspiring destinations, let us guide you to the most extraordinary places on the planet.
+				Accede a producto estructurado, multidestino y con respaldo real para hacer crecer tu negocio.
 			</p>
 			<button class="btn-explore">Explore more</button>
 		</div>
