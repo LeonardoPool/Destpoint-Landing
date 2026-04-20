@@ -1,6 +1,15 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import subtractImg from '$lib/images/Subtract.png';
-	import logoImg from '$lib/images/logo.png';
+	import Navbar from '$lib/components/Navbar.svelte';
+	import beliceCard from '$lib/images/Cards/BELICE.jpg';
+	import chiapasCard from '$lib/images/Cards/CHIAPAS.jpg';
+	import guatemalaCard from '$lib/images/Cards/GUATEMALA.jpg';
+	import hondurasCard from '$lib/images/Cards/HONDURAS.jpg';
+	import qrooCard from '$lib/images/Cards/QROO.jpg';
+	import salvadorCard from '$lib/images/Cards/SALVADOR.jpg';
+	import tabascoCard from '$lib/images/Cards/TABASCO.jpg';
+	import yucatanCard from '$lib/images/Cards/Yucatan.jpg';
 	import travelokaLogo from '$lib/images/empresas/Traveloka logo.svg';
 	import airbnbLogo from '$lib/images/empresas/airbnb logo.svg';
 	import expediaLogo from '$lib/images/empresas/Expedia logo.svg';
@@ -8,50 +17,114 @@
 	import americanAirlinesLogo from '$lib/images/empresas/american-airlines logo.svg';
 	import '$lib/styles/hero.css';
 
-	let currentSlide = 0;
+	let currentPage = $state(0);
+	let cardsPerView = $state(4);
 
 	const destinations = [
 		{
 			id: 1,
-			name: 'Venice',
-			country: 'Italy',
-			image: 'linear-gradient(135deg, #ff6b6b 0%, #ffe66d 100%)',
+			name: 'BELICE',
+			image: beliceCard,
 			rating: 4.5,
 			price: 900
 		},
 		{
 			id: 2,
-			name: 'Bali',
-			country: 'Indonesia',
-			image: 'linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%)',
+			name: 'CHIAPAS',
+			image: chiapasCard,
 			rating: 4.5,
 			price: 480
 		},
 		{
 			id: 3,
-			name: 'Bangkok',
-			country: 'Thailand',
-			image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+			name: 'GUATEMALA',
+			image: guatemalaCard,
 			rating: 4.5,
 			price: 440
 		},
 		{
 			id: 4,
-			name: 'Santorini',
-			country: 'Greek',
-			image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+			name: 'HONDURAS',
+			image: hondurasCard,
+			rating: 4.5,
+			price: 900
+		},
+		{
+			id: 5,
+			name: 'QROO',
+			image: qrooCard,
+			rating: 4.5,
+			price: 900
+		},
+		{
+			id: 6,
+			name: 'SALVADOR',
+			image: salvadorCard,
+			rating: 4.5,
+			price: 900
+		},
+		{
+			id: 7,
+			name: 'TABASCO',
+			image: tabascoCard,
+			rating: 4.5,
+			price: 900
+		},
+		{
+			id: 8,
+			name: 'Yucatan',
+			image: yucatanCard,
 			rating: 4.5,
 			price: 900
 		}
 	];
 
+	function getCardsPerViewForWidth(width: number) {
+		if (width <= 480) return 1;
+		if (width <= 768) return 2;
+		if (width <= 1200) return 3;
+		return 4;
+	}
+
+	const totalPages = $derived(Math.max(1, destinations.length - cardsPerView + 1));
+
+	const visibleDestinations = $derived.by(() => {
+		const start = currentPage;
+		const end = start + cardsPerView;
+		return destinations.slice(start, end);
+	});
+
 	function nextSlide() {
-		currentSlide = (currentSlide + 1) % destinations.length;
+		if (currentPage >= destinations.length - cardsPerView) {
+			currentPage = 0;
+		} else {
+			currentPage += 1;
+		}
 	}
 
 	function prevSlide() {
-		currentSlide = (currentSlide - 1 + destinations.length) % destinations.length;
+		if (currentPage <= 0) {
+			currentPage = destinations.length - cardsPerView;
+		} else {
+			currentPage -= 1;
+		}
 	}
+
+	onMount(() => {
+		const handleResize = () => {
+			cardsPerView = getCardsPerViewForWidth(window.innerWidth);
+			if (currentPage >= totalPages) {
+				currentPage = totalPages - 1;
+			}
+		};
+
+		handleResize();
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	});
 
 	const features = [
 		{
@@ -85,43 +158,21 @@
 </svelte:head>
 
 <!-- ─── Navbar ──────────────────────────────────────────────── -->
-<nav class="navbar">
-	<a href="/" class="logo">
-		<img src={logoImg} alt="Destpoint Logo" class="logo-img" />
-	</a>
-
-	<ul class="nav-links">
-		<li><a href="/" class="active">Inicio</a></li>
-		<li><a href="/about">Sobre Nosotros</a></li>
-		<li>
-			<button class="nav-pkg-btn">
-				Packages
-				<!-- Chevron down -->
-				<svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-					<path d="M2 4.5L6 8.5L10 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-				</svg>
-			</button>
-		</li>
-		<li><a href="/faq">FAQ</a></li>
-		<li><a href="/community">Community</a></li>
-	</ul>
-
-	<div class="nav-actions">
-		<button class="btn-login">Inicia Sesión</button>
-		<button class="btn-signup">Regístrate</button>
-	</div>
-</nav>
+<Navbar currentPath="/" />
 
 <!-- ─── Hero ────────────────────────────────────────────────── -->
 <section class="hero">
 
 	<!-- Left column -->
 	<div class="hero-left">
-		<img src={logoImg} alt="Destpoint" class="hero-logo" />
+		<h1 class="hero-title">
+			La nueva forma de conectar agencias de viajes<br />
+			con el Mundo Maya
+		</h1>
 		<p class="hero-desc">
-			Your journey begins here with our curated travel experiences.<br />
-			Discover new horizons, create lasting memories, and explore the<br />
-			world with our expertly crafted itineraries.
+			Operadora mayorista B2B especializada en productos multidestino<br />
+			en México y Centroamérica, con estructura real, disponibilidad y<br />
+			respaldo operativo.
 		</p>
 
 		<div class="follow-us">
@@ -229,16 +280,26 @@
 <section class="destinations">
 	<div class="destinations-header">
 		<div>
-			<h2 class="destinations-title">Popular Destinations</h2>
-			<p class="destinations-desc">See our popular destinations that our client choose</p>
+			<h2 class="destinations-title">5 paises, 1 Sola estrategia comercial</h2>
+			<p class="destinations-desc">MÉXICO
+				Yucatán
+				Campeche
+				Quintana Roo
+				Chiapas
+				Tabasco
+				CENTROAMÉRICA
+				Guatemala
+				Belice
+				Honduras
+				El Salvador</p>
 		</div>
 		<div class="destinations-nav">
-			<button class="nav-btn nav-btn--prev" on:click={prevSlide} aria-label="Previous destination">
+			<button type="button" class="nav-btn nav-btn--prev" onclick={() => prevSlide()} aria-label="Previous destination">
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<polyline points="15 18 9 12 15 6" />
 				</svg>
 			</button>
-			<button class="nav-btn nav-btn--next" on:click={nextSlide} aria-label="Next destination">
+			<button type="button" class="nav-btn nav-btn--next" onclick={() => nextSlide()} aria-label="Next destination">
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<polyline points="9 18 15 12 9 6" />
 				</svg>
@@ -248,12 +309,12 @@
 
 	<div class="carousel-wrapper">
 		<div class="carousel-container">
-			{#each destinations as dest, index (dest.id)}
-				<div class="carousel-slide" style="--order: {index}; --current: {currentSlide};" class:active={index === currentSlide}>
+			{#each visibleDestinations as dest (dest.id)}
+				<div class="carousel-slide">
 					<div class="card">
-						<div class="card-image" style="background: {dest.image}"></div>
+						<img class="card-image" src={dest.image} alt={dest.name} />
 						<div class="card-content">
-							<h3 class="card-title">{dest.name}, {dest.country}</h3>
+							<h3 class="card-title">{dest.name}</h3>
 							<div class="card-rating">
 								<svg class="star-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
 									<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
