@@ -312,15 +312,8 @@
 				<div class="carousel-slide">
 					<div class="card">
 						<img class="card-image" src={dest.image} alt={dest.name} />
-						<div class="card-content">
-							<h3 class="card-title">{dest.name}</h3>
-							<div class="card-rating">
-								<svg class="star-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-									<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-								</svg>
-								<span>({dest.rating})</span>
-							</div>
-							<p class="card-price">Starts from <span class="price-value">${dest.price}</span></p>
+						<div class="card-pill-wrap">
+							<span class="card-pill">{dest.name}</span>
 						</div>
 					</div>
 				</div>
@@ -442,7 +435,7 @@
 				<span class="footer-logo-name">Destpoint</span>
 			</div>
 			<p class="footer-desc">
-				Wanderlust meets wander well – Experience seamless travel with our services.
+				Wanderlust meets wander well – Experience seamless travel with our Servicios.
 			</p>
 		</div>
 

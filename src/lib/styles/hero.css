@@ -762,16 +762,15 @@ body {
 
 .card {
   position: relative;
-  background: #ffffff;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
 }
 
 .card-image {
@@ -781,39 +780,47 @@ body {
   object-fit: cover;
 }
 
-.card-content {
-  padding: 1.2rem 1rem;
-}
+/* ── Liquid glass pill ─────────────────────────────── */
 
-.card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #0c0c0c;
-  margin-bottom: 0.4rem;
-}
-
-.card-rating {
+.card-pill-wrap {
+  position: absolute;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
   display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 0.4rem;
+  justify-content: center;
+  pointer-events: none;
 }
 
-.card-rating .star-icon {
-  color: #ffac33;
-}
+.card-pill {
+  /* Frosted glass base */
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
 
-.card-price {
-  font-size: 0.85rem;
-  color: #888;
-}
+  /* Subtle specular border (top highlight) */
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 
-.price-value {
-  color: #184a57;
-  font-weight: 600;
-  font-size: 0.9rem;
+  /* Shape */
+  border-radius: 999px;
+  padding: 0.38rem 1.1rem;
+
+  /* Text */
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+
+  /* Glow / depth */
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+
+  /* Prevent text wrap */
+  white-space: nowrap;
 }
 
 @media (max-width: 1200px) {
