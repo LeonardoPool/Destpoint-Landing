@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import subtractImg from '$lib/images/Subtract.png';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import beliceCard from '$lib/images/Cards/BELICE.jpg';
 	import chiapasCard from '$lib/images/Cards/CHIAPAS.jpg';
 	import guatemalaCard from '$lib/images/Cards/GUATEMALA.jpg';
@@ -166,12 +167,10 @@
 	<!-- Left column -->
 	<div class="hero-left">
 		<h1 class="hero-title">
-			Conectando agencias de viajes con el Mundo Maya
+			El mundo, a tu manera.
 		</h1>
 		<p class="hero-desc">
-			Operadora mayorista B2B especializada en productos multidestino
-			en México y Centroamérica, con estructura real, disponibilidad y
-			respaldo operativo.
+AZUWA Travel es una agencia de viajes especializada en experiencias nacionales e internacionales para parejas, familias, grupos y empresas. Organizamos vacaciones, bodas destino, quince años, lunas de miel, incentivos y convenciones, combinando atención personalizada, tecnología, seguridad y acompañamiento profesional antes, durante y después de cada viaje.
 		</p>
 
 		<div class="follow-us">
@@ -422,84 +421,4 @@
 </section>
 
 <!-- ─── Footer ──────────────────────────────────────────── -->
-<footer class="footer">
-	<div class="footer-content">
-		<!-- Left section -->
-		<div class="footer-left">
-			<div class="footer-logo">
-				<!-- Logo mark -->
-				<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<rect x="0.75" y="0.75" width="24.5" height="24.5" rx="4.25" stroke="#184a57" stroke-width="1.5" />
-			<text x="13" y="18" text-anchor="middle" font-size="13" font-weight="700" fill="#184a57" font-family="sans-serif">D</text>
-				</svg>
-				<span class="footer-logo-name">Destpoint</span>
-			</div>
-			<p class="footer-desc">
-				Wanderlust meets wander well – Experience seamless travel with our Servicios.
-			</p>
-		</div>
-
-		<!-- Middle sections -->
-		<div class="footer-links">
-			<div class="footer-column">
-				<h4 class="footer-heading">Company</h4>
-				<ul>
-					<li><a href="/">About Us</a></li>
-					<li><a href="/">Blog</a></li>
-					<li><a href="/">Customers</a></li>
-					<li><a href="/">Packages</a></li>
-					<li><a href="/">Community</a></li>
-				</ul>
-			</div>
-
-			<div class="footer-column">
-				<h4 class="footer-heading">Help</h4>
-				<ul>
-					<li><a href="/">Support</a></li>
-					<li><a href="/">FAQs</a></li>
-					<li><a href="/">Refund Policy</a></li>
-				</ul>
-			</div>
-		</div>
-
-		<!-- Right section - Social -->
-		<div class="footer-social">
-			<h4 class="footer-heading">Follow Us</h4>
-			<div class="social-links">
-				<a href="/" class="social-link" aria-label="Facebook">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-					</svg>
-					Facebook
-				</a>
-				<a href="/" class="social-link" aria-label="Instagram">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-						<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-						<line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-					</svg>
-					Instagram
-				</a>
-				<a href="/" class="social-link" aria-label="Twitter">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-					</svg>
-					Twitter
-				</a>
-			</div>
-		</div>
-	</div>
-
-	<!-- Divider -->
-	<div class="footer-divider"></div>
-
-	<!-- Bottom section -->
-	<div class="footer-bottom">
-		<p class="footer-copyright">2026 Destpoint. All right reserved. HANDCRAFTED</p>
-		<div class="footer-legal">
-			<a href="/">Privacy Policy</a>
-			<a href="/">Terms of Service</a>
-			<a href="/">Cookies Settings</a>
-		</div>
-	</div>
-</footer>
+<Footer />

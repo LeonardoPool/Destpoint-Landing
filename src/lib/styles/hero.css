@@ -126,9 +126,10 @@ body {
 }
 
 .logo-img {
-  height: 40px;
+  height: 65px;
   width: auto;
   display: block;
+  border-radius: 90%;
 }
 
 .hero-logo {
@@ -158,7 +159,7 @@ body {
 }
 
 .nav-links a.active {
-  color: #3DD8D8;
+  color: #002969;
 }
 
 .nav-pkg-btn {
@@ -1437,6 +1438,13 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.footer-logo-img {
+  height: 45px;
+  width: auto;
+  border-radius: 90%;
+  display: block;
 }
 
 .footer-logo-name {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logoImg from '$lib/images/logo.png';
+	import logoImg from '$lib/images/AzuwaTravel.jpeg';
 
 	let { currentPath = '/' } = $props<{ currentPath?: string }>();
 </script>
