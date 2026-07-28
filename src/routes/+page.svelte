@@ -1,129 +1,118 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import subtractImg from '$lib/images/Subtract.png';
+	import heroImage from '$lib/images/heroimage.png';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import beliceCard from '$lib/images/Cards/BELICE.jpg';
-	import chiapasCard from '$lib/images/Cards/CHIAPAS.jpg';
-	import guatemalaCard from '$lib/images/Cards/GUATEMALA.jpg';
-	import hondurasCard from '$lib/images/Cards/HONDURAS.jpg';
-	import qrooCard from '$lib/images/Cards/QROO.jpg';
-	import salvadorCard from '$lib/images/Cards/SALVADOR.jpg';
-	import tabascoCard from '$lib/images/Cards/TABASCO.jpg';
-	import yucatanCard from '$lib/images/Cards/Yucatan.jpg';
 	import travelokaLogo from '$lib/images/empresas/Traveloka logo.svg';
 	import airbnbLogo from '$lib/images/empresas/airbnb logo.svg';
 	import expediaLogo from '$lib/images/empresas/Expedia logo.svg';
 	import skyscannerLogo from '$lib/images/empresas/Skyscanner logo.svg';
 	import americanAirlinesLogo from '$lib/images/empresas/american-airlines logo.svg';
 	import '$lib/styles/hero.css';
+	import { onMount } from 'svelte';
+	import { fade, scale } from 'svelte/transition';
+	import promoCozumel from '$lib/images/promos/PromoCozumel.jpeg';
+	import promoSecrets from '$lib/images/promos/PromoSecrets.jpeg';
+	import promoReef28 from '$lib/images/promos/Reef28.jpeg';
+	import { getPromotions, getSupportImages } from '$lib/promoService';
 
-	let currentPage = $state(0);
-	let cardsPerView = $state(4);
-
-	const destinations = [
+	const defaultPromos = [
 		{
-			id: 1,
-			name: 'BELICE',
-			image: beliceCard,
-			rating: 4.5,
-			price: 900
+			id: 'default-1',
+			title: 'Cozumel Increíble',
+			subtitle: 'Disfruta del paraíso caribeño en Cozumel con tarifas especiales de hospedaje, snorkel guiado incluido y desayunos gratis para toda la familia.',
+			image: promoCozumel
 		},
 		{
-			id: 2,
-			name: 'CHIAPAS',
-			image: chiapasCard,
-			rating: 4.5,
-			price: 480
+			id: 'default-2',
+			title: 'Secrets Resorts & Spas',
+			subtitle: 'Escapada de lujo todo incluido solo para adultos. Obtén hasta un 40% de descuento, cenas gourmet ilimitadas y amenidades VIP exclusivas.',
+			image: promoSecrets
 		},
 		{
-			id: 3,
-			name: 'GUATEMALA',
-			image: guatemalaCard,
-			rating: 4.5,
-			price: 440
-		},
-		{
-			id: 4,
-			name: 'HONDURAS',
-			image: hondurasCard,
-			rating: 4.5,
-			price: 900
-		},
-		{
-			id: 5,
-			name: 'QROO',
-			image: qrooCard,
-			rating: 4.5,
-			price: 900
-		},
-		{
-			id: 6,
-			name: 'SALVADOR',
-			image: salvadorCard,
-			rating: 4.5,
-			price: 900
-		},
-		{
-			id: 7,
-			name: 'TABASCO',
-			image: tabascoCard,
-			rating: 4.5,
-			price: 900
-		},
-		{
-			id: 8,
-			name: 'Yucatan',
-			image: yucatanCard,
-			rating: 4.5,
-			price: 900
+			id: 'default-3',
+			title: 'The Reef 28 - Playa del Carmen',
+			subtitle: 'Experiencia cosmopolita All-Suites en el corazón de Playa del Carmen. Tarifas de promoción especial con barra libre premium y acceso a club de playa.',
+			image: promoReef28
 		}
 	];
 
-	function getCardsPerViewForWidth(width: number) {
-		if (width <= 480) return 1;
-		if (width <= 768) return 2;
-		if (width <= 1200) return 3;
-		return 4;
-	}
-
-	const totalPages = $derived(Math.max(1, destinations.length - cardsPerView + 1));
-
-	const visibleDestinations = $derived.by(() => {
-		const start = currentPage;
-		const end = start + cardsPerView;
-		return destinations.slice(start, end);
-	});
-
-	function nextSlide() {
-		if (currentPage >= destinations.length - cardsPerView) {
-			currentPage = 0;
-		} else {
-			currentPage += 1;
-		}
-	}
-
-	function prevSlide() {
-		if (currentPage <= 0) {
-			currentPage = destinations.length - cardsPerView;
-		} else {
-			currentPage -= 1;
-		}
-	}
+	let promotions = $state<Array<{ id?: string; title: string; subtitle: string; image: string }>>(defaultPromos);
+	let currentPromoIndex = $state(0);
+	let isHovered = $state(false);
+	let lightboxImage = $state<string | null>(null);
+	let lightboxTitle = $state('');
+	let lightboxSubtitle = $state('');
 
 	onMount(() => {
-		const handleResize = () => {
-			cardsPerView = getCardsPerViewForWidth(window.innerWidth);
-			if (currentPage >= totalPages) {
-				currentPage = totalPages - 1;
+		const loadPromotions = async () => {
+			try {
+				const dbPromos = await getPromotions();
+				const dbSupport = await getSupportImages();
+				
+				const today = new Date();
+				
+				// Filter promotions: only active ones (expiration date is today or future)
+				const activePromos = dbPromos.filter(p => new Date(p.expirationDate) >= today);
+				
+				// Filter support images: only active ones
+				const activeSupport = dbSupport.filter(s => new Date(s.expirationDate) >= today);
+				
+				// Map to match the HTML bindings: title, subtitle, image
+				const mappedPromos = activePromos.map(p => ({
+					id: p.id,
+					title: p.title,
+					subtitle: p.description,
+					image: p.imageUrl
+				}));
+
+				const mappedSupport = activeSupport.map(s => ({
+					id: s.id,
+					title: s.title,
+					subtitle: s.description,
+					image: s.imageUrl
+				}));
+
+				let combinedList = [...mappedPromos];
+
+				// Fill with support images if under 3
+				if (combinedList.length < 3) {
+					for (const support of mappedSupport) {
+						if (combinedList.length >= 3) break;
+						if (!combinedList.some(item => item.id === support.id)) {
+							combinedList.push(support);
+						}
+					}
+				}
+
+				// Fill with default fallbacks if still under 3
+				if (combinedList.length < 3) {
+					for (const fallback of defaultPromos) {
+						if (combinedList.length >= 3) break;
+						combinedList.push({
+							id: fallback.id,
+							title: fallback.title,
+							subtitle: fallback.subtitle,
+							image: fallback.image
+						});
+					}
+				}
+
+				promotions = combinedList;
+			} catch (error) {
+				console.error('Error loading promotions from Firebase:', error);
 			}
 		};
 
-		handleResize();
-		window.addEventListener('resize', handleResize);
+		loadPromotions();
+
+		const interval = setInterval(() => {
+			if (!isHovered && lightboxImage === null) {
+				currentPromoIndex = (currentPromoIndex + 1) % promotions.length;
+			}
+		}, 5000);
 
 		return () => {
-			window.removeEventListener('resize', handleResize);
+			clearInterval(interval);
 		};
 	});
 
@@ -174,58 +163,16 @@ AZUWA Travel es una agencia de viajes especializada en experiencias nacionales e
 		</p>
 
 		<div class="follow-us">
-			<span class="follow-label">Síguenos en nuestras redes</span>
-			<div class="socials">
-
-				<!-- Facebook -->
-				<button class="social-btn" aria-label="Facebook">
-					<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-					</svg>
-				</button>
-
-				<!-- Instagram -->
-				<button class="social-btn" aria-label="Instagram">
-					<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-						<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-						<line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-					</svg>
-				</button>
-
-				<!-- Twitter / X -->
-				<button class="social-btn" aria-label="Twitter">
-					<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-					</svg>
-				</button>
-
-			</div>
 		</div>
 	</div>
 
 	<!-- Right column -->
 	<div class="hero-right">
 
-		<!-- Main hero image (Subtract.png) -->
-		<img src={subtractImg} alt="Destpoint travel destination" class="hero-img" />
+		<!-- Main hero image -->
+		<img src={heroImage} alt="Destpoint travel destination" class="hero-img" />
 
-		<!-- Destination card overlay -->
-		<div class="dest-card">
-			<!-- Thumbnail placeholder: replace with actual image when available -->
-			<div class="card-thumb"></div>
-			<div>
-				<p class="card-name">Coco De Heaven</p>
-				<div class="card-rating">
-					<!-- Star icon -->
-					<svg class="star-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-						<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-					</svg>
-					(4.5)
-				</div>
-				<p class="card-from">Starts from <span class="card-price">$400</span></p>
-			</div>
-		</div>
+
 
 		<!-- Scroll-down circular badge -->
 		<div class="scroll-badge">
@@ -259,8 +206,121 @@ AZUWA Travel es una agencia de viajes especializada en experiencias nacionales e
 			</div>
 		</div>
 
+	</section>
+
+<!-- ─── Nuestras Promociones ───────────────────────────── -->
+<section class="promotions-section">
+	<h2 class="section-main-title">Nuestras Promociones</h2>
+
+	<!-- Active Promotion Info (Above the stack) -->
+	<div class="active-promo-info">
+		<span class="promo-badge">OFERTA EXCLUSIVA</span>
+		<h3 class="promo-title">{promotions[currentPromoIndex].title}</h3>
+		<p class="promo-desc">{promotions[currentPromoIndex].subtitle}</p>
+	</div>
+
+	<!-- 3D Card Stack Container -->
+	<div 
+		class="promo-stack-container"
+		onmouseenter={() => isHovered = true}
+		onmouseleave={() => isHovered = false}
+	>
+		<!-- Left/Right navigation buttons -->
+		<button 
+			class="stack-nav-btn prev"
+			onclick={() => currentPromoIndex = (currentPromoIndex - 1 + promotions.length) % promotions.length}
+			aria-label="Anterior"
+		>
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+				<polyline points="15 18 9 12 15 6" />
+			</svg>
+		</button>
+
+		<div class="cards-stack">
+			{#each promotions as promo, index}
+				<div 
+					class="stack-card-wrapper"
+					class:active={index === currentPromoIndex}
+					class:left={index === (currentPromoIndex - 1 + promotions.length) % promotions.length}
+					class:right={index === (currentPromoIndex + 1) % promotions.length}
+					onclick={() => {
+						if (index !== currentPromoIndex) {
+							currentPromoIndex = index;
+						}
+					}}
+				>
+					<div class="stack-card">
+						<img src={promo.image} alt={promo.title} class="stack-card-img" />
+						
+						<div class="stack-card-overlay">
+							<button 
+								class="zoom-details-btn"
+								onclick={(e) => {
+									e.stopPropagation();
+									lightboxImage = promo.image;
+									lightboxTitle = promo.title;
+									lightboxSubtitle = promo.subtitle;
+								}}
+							>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<circle cx="11" cy="11" r="8"></circle>
+									<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+									<line x1="11" y1="8" x2="11" y2="14"></line>
+									<line x1="8" y1="11" x2="14" y2="11"></line>
+								</svg>
+								Ver más detalles
+							</button>
+						</div>
+					</div>
+				</div>
+			{/each}
+		</div>
+
+		<button 
+			class="stack-nav-btn next"
+			onclick={() => currentPromoIndex = (currentPromoIndex + 1) % promotions.length}
+			aria-label="Siguiente"
+		>
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+				<polyline points="9 18 15 12 9 6" />
+			</svg>
+		</button>
+	</div>
+
+	<!-- Dots Indicators -->
+	<div class="stack-dots">
+		{#each promotions as _, index}
+			<button 
+				class="stack-dot"
+				class:active={currentPromoIndex === index}
+				onclick={() => currentPromoIndex = index}
+				aria-label="Ir a promo {index + 1}"
+			></button>
+		{/each}
 	</div>
 </section>
+
+<!-- Lightbox Modal -->
+{#if lightboxImage !== null}
+	<div 
+		class="lightbox-backdrop"
+		onclick={() => lightboxImage = null}
+		role="dialog"
+		aria-modal="true"
+		transition:fade={{ duration: 300 }}
+	>
+		<div class="lightbox-content-image-only" onclick={(e) => e.stopPropagation()} transition:scale={{ duration: 300, start: 0.95 }}>
+			<button class="lightbox-close-btn" onclick={() => lightboxImage = null} aria-label="Cerrar modal">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="18" y1="6" x2="6" y2="18"></line>
+					<line x1="6" y1="6" x2="18" y2="18"></line>
+				</svg>
+			</button>
+
+			<img src={lightboxImage} alt="Detalle de promoción" class="lightbox-image-only" />
+		</div>
+	</div>
+{/if}
 
 <!-- ─── Travel Partners ───────────────────────────────────── -->
 <section class="partners" aria-label="Empresas aliadas">
@@ -274,52 +334,7 @@ AZUWA Travel es una agencia de viajes especializada en experiencias nacionales e
 	</div>
 </section>
 
-<!-- ─── Popular Destinations ──────────────────────────────── -->
-<section class="destinations">
-	<div class="destinations-header">
-		<div>
-			<h2 class="destinations-title">5 paises, 1 Sola estrategia comercial</h2>
-			<p class="destinations-desc">MÉXICO
-				Yucatán
-				Campeche
-				Quintana Roo
-				Chiapas
-				Tabasco
-				CENTROAMÉRICA
-				Guatemala
-				Belice
-				Honduras
-				El Salvador</p>
-		</div>
-		<div class="destinations-nav">
-			<button type="button" class="nav-btn nav-btn--prev" onclick={() => prevSlide()} aria-label="Previous destination">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<polyline points="15 18 9 12 15 6" />
-				</svg>
-			</button>
-			<button type="button" class="nav-btn nav-btn--next" onclick={() => nextSlide()} aria-label="Next destination">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<polyline points="9 18 15 12 9 6" />
-				</svg>
-			</button>
-		</div>
-	</div>
 
-	<div class="carousel-wrapper">
-		<div class="carousel-container">
-			{#each visibleDestinations as dest (dest.id)}
-				<div class="carousel-slide">
-					<div class="card">
-						<img class="card-image" src={dest.image} alt={dest.name} />
-						<div class="card-pill-wrap">
-							<span class="card-pill">{dest.name}</span>
-						</div>
-					</div>
-				</div>
-			{/each}
-		</div>
-	</div>
-</section>
 
 <!-- ─── Why Choose Us ────────────────────────────────────── -->
 <section class="why-us">

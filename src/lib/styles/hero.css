@@ -29,9 +29,7 @@ body {
     padding: 2.5rem 7rem 4rem;
   }
 
-  .destinations {
-    padding: 4.5rem 7rem;
-  }
+
 
   .why-us {
     padding: 5rem 7rem;
@@ -126,7 +124,7 @@ body {
 }
 
 .logo-img {
-  height: 65px;
+  height: 100px;
   width: auto;
   display: block;
   border-radius: 90%;
@@ -187,6 +185,10 @@ body {
 }
 
 .btn-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   padding: 0.52rem 1.55rem;
   border: 1.5px solid #cecece;
   border-radius: 8px;
@@ -226,8 +228,8 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 2rem 5rem 3rem;
-  min-height: calc(100vh - 74px);
+  padding: 2rem 5rem 1.5rem;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -248,7 +250,7 @@ body {
 
   .hero-title {
     font-size: clamp(1.8rem, 4vw, 2.8rem);
-    max-width: 26rem;
+    max-width: none;
   }
 
   .hero-right {
@@ -281,7 +283,7 @@ body {
 
   .follow-us {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
   }
 
@@ -306,23 +308,30 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: -5rem;
 }
 
 .hero-title {
-  font-size: clamp(2rem, 3.2vw, 3.5rem);
+  font-size: clamp(3rem, 4.8vw, 4.8rem);
   font-weight: 700;
   line-height: 1.04;
   color: #0c0c0c;
-  max-width: 30rem;
+  max-width: none;
   margin-bottom: 1.4rem;
+  text-align: center;
 }
 
 .hero-desc {
   font-size: 0.94rem;
   line-height: 1.72;
   color: #9e9e9e;
-  max-width: 390px;
+  max-width: 480px;
   margin-bottom: 3.5rem;
+  text-align: justify;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .follow-us {
@@ -381,6 +390,7 @@ body {
   object-fit: contain;
   object-position: top;
   display: block;
+  border-radius: 28px;
 }
 
 /* Destination card */
@@ -493,10 +503,12 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+
   80% {
     opacity: 0;
     transform: translateY(6px);
   }
+
   100% {
     opacity: 0;
     transform: translateY(0);
@@ -609,268 +621,7 @@ body {
   }
 }
 
-/* ─── DESTINATIONS ───────────────────────────────────── */
 
-.destinations {
-  padding: 3.5rem 5rem;
-  background: #ffffff;
-}
-
-@media (max-width: 1024px) {
-  .destinations {
-    padding: 2.5rem 3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .destinations {
-    padding: 2rem 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .destinations {
-    padding: 1.5rem 1rem;
-  }
-
-  .destinations-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .destinations-title {
-    font-size: 1.3rem;
-  }
-
-  .destinations-nav {
-    width: 100%;
-  }
-
-  .nav-btn {
-    width: 36px;
-    height: 36px;
-  }
-}
-
-.destinations-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
-  gap: 2rem;
-}
-
-.destinations-title {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  font-weight: 700;
-  color: #0c0c0c;
-  margin-bottom: 0.5rem;
-}
-
-.destinations-desc {
-  font-size: 0.95rem;
-  color: #9e9e9e;
-}
-
-.destinations-nav {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.nav-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1.5px solid #d0d0d0;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #666;
-  padding: 0;
-  transition: all 0.2s ease;
-}
-
-.nav-btn:hover {
-  border-color: #999;
-  color: #333;
-}
-
-.nav-btn--next {
-  border-color: #184a57;
-  background: #184a57;
-  color: #ffffff;
-}
-
-.nav-btn--next:hover {
-  background: #0f3a47;
-  border-color: #0f3a47;
-}
-
-/* Carousel */
-
-.carousel-wrapper {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-}
-
-.carousel-container {
-  display: flex;
-  gap: 1.5rem;
-  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
-}
-
-.carousel-slide {
-  flex: 0 0 calc(25% - 1.125rem);
-  min-width: 0;
-  animation: slideIn 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0.9;
-    transform: translateX(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@media (max-width: 1200px) {
-  .carousel-slide {
-    flex: 0 0 calc(33.333% - 1rem);
-  }
-}
-
-@media (max-width: 768px) {
-  .carousel-slide {
-    flex: 0 0 calc(50% - 0.75rem);
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-slide {
-    flex: 0 0 100%;
-  }
-}
-
-/* Cards */
-
-.card {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
-}
-
-.card-image {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  display: block;
-  object-fit: cover;
-}
-
-/* ── Liquid glass pill ─────────────────────────────── */
-
-.card-pill-wrap {
-  position: absolute;
-  bottom: 1rem;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.card-pill {
-  /* Frosted glass base */
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-
-  /* Subtle specular border (top highlight) */
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-
-  /* Shape */
-  border-radius: 999px;
-  padding: 0.38rem 1.1rem;
-
-  /* Text */
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #ffffff;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
-
-  /* Glow / depth */
-  box-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
-
-  /* Prevent text wrap */
-  white-space: nowrap;
-}
-
-@media (max-width: 1200px) {
-  .carousel-slide {
-    flex: 0 0 calc(33.333% - 1rem);
-  }
-
-  .destinations {
-    padding: 3rem 4rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .carousel-slide {
-    flex: 0 0 calc(50% - 0.75rem);
-  }
-
-  .destinations {
-    padding: 2rem 1.5rem;
-  }
-
-  .destinations-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-btn {
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .carousel-slide {
-    flex: 0 0 100%;
-  }
-
-  .destinations {
-    padding: 1.5rem 1rem;
-  }
-
-  .destinations-title {
-    font-size: 1.5rem;
-  }
-
-  .destinations-desc {
-    font-size: 0.85rem;
-  }
-}
 
 /* ─── WHY US ─────────────────────────────────────────── */
 
@@ -1609,5 +1360,355 @@ body {
   .footer-legal {
     flex-direction: column;
     gap: 0.8rem;
+  }
+}
+
+/* ─── NUESTRAS PROMOCIONES (3D STACK CAROUSEL) ─────────── */
+
+.promotions-section {
+  padding: 4.5rem 5rem;
+  background: #ffffff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.section-main-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #0c0c0c;
+  margin-bottom: 2rem;
+}
+
+/* Active Promotion Info details */
+.active-promo-info {
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.promo-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #184a57;
+  letter-spacing: 0.15em;
+  background: rgba(24, 74, 87, 0.08);
+  padding: 0.45rem 1.1rem;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.promo-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #184a57;
+  margin-bottom: 0.75rem;
+}
+
+.promo-desc {
+  font-size: 0.98rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 3D Card Stack Container */
+.promo-stack-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 2.5rem;
+  perspective: 1200px;
+}
+
+/* Stack Nav Buttons */
+.stack-nav-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #184a57;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+  z-index: 20;
+}
+
+.stack-nav-btn:hover {
+  background: #184a57;
+  color: #ffffff;
+  border-color: #184a57;
+  box-shadow: 0 6px 16px rgba(24, 74, 87, 0.25);
+  transform: scale(1.05);
+}
+
+/* Cards Stack Wrapper */
+.cards-stack {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 510px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.stack-card-wrapper {
+  position: absolute;
+  width: 380px;
+  height: 475px;
+  transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), 
+              opacity 0.7s, 
+              z-index 0.7s, 
+              filter 0.7s;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.stack-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  position: relative;
+  background: #ffffff;
+}
+
+.stack-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 3D Stack Classes */
+.stack-card-wrapper.active {
+  transform: translate3d(0, 0, 80px) scale(1);
+  opacity: 1;
+  z-index: 10;
+  cursor: default;
+  filter: none;
+}
+
+.stack-card-wrapper.left {
+  transform: translate3d(-180px, 0, -80px) scale(0.85);
+  opacity: 0.65;
+  z-index: 5;
+  filter: brightness(0.9);
+}
+
+.stack-card-wrapper.right {
+  transform: translate3d(180px, 0, -80px) scale(0.85);
+  opacity: 0.65;
+  z-index: 5;
+  filter: brightness(0.9);
+}
+
+/* Hover Zoom for active card */
+.stack-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(24, 74, 87, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.stack-card-wrapper.active:hover .stack-card-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.zoom-details-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.6rem;
+  background: #ffffff;
+  color: #184a57;
+  border: none;
+  border-radius: 99px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, background-color 0.2s;
+}
+
+.zoom-details-btn:hover {
+  transform: scale(1.05);
+  background: #f8f8f8;
+}
+
+/* Dots Navigation */
+.stack-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.stack-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #dcdcdc;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.stack-dot.active {
+  background: #184a57;
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* Lightbox Modal Styles */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.lightbox-content-image-only {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image-only {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  color: #184a57;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+}
+
+.lightbox-close-btn:hover {
+  background: #ffffff;
+  color: #184a57;
+  transform: scale(1.08);
+}
+
+/* Media Queries for 3D Stack */
+@media (max-width: 1024px) {
+  .promotions-section {
+    padding: 3.5rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .promotions-section {
+    padding: 3rem 1.5rem;
+  }
+
+  .stack-nav-btn {
+    display: none;
+  }
+
+  .cards-stack {
+    height: 420px;
+  }
+
+  .stack-card-wrapper {
+    width: 280px;
+    height: 350px;
+  }
+
+  .stack-card-wrapper.left {
+    transform: translate3d(-100px, 0, -80px) scale(0.85);
+  }
+
+  .stack-card-wrapper.right {
+    transform: translate3d(100px, 0, -80px) scale(0.85);
+  }
+}
+
+@media (max-width: 480px) {
+  .promotions-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .section-main-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .active-promo-info {
+    margin-bottom: 2rem;
+  }
+
+  .promo-title {
+    font-size: 1.3rem;
+  }
+
+  .promo-desc {
+    font-size: 0.88rem;
+  }
+
+  .cards-stack {
+    height: 320px;
+  }
+
+  .stack-card-wrapper {
+    width: 220px;
+    height: 275px;
+  }
+
+  .stack-card-wrapper.left {
+    transform: translate3d(-60px, 0, -80px) scale(0.85);
+  }
+
+  .stack-card-wrapper.right {
+    transform: translate3d(60px, 0, -80px) scale(0.85);
+  }
+
+  .lightbox-backdrop {
+    padding: 1rem;
   }
 }

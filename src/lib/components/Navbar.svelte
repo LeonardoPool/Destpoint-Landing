@@ -21,11 +21,11 @@
 			</button>
 		</li>
 		<li><a href="/faq">FAQ</a></li>
-		<li><a href="/community">Community</a></li>
+		<li><a href="/community">Contacto</a></li>
 	</ul>
 
 	<div class="nav-actions">
-		<button class="btn-login">Solicitar acceso</button>
-		<button class="btn-signup">Agendar demo</button>
+		<a href="/admin" class="btn-login">Iniciar sesión</a>
+		<button class="btn-signup">Solicitar acceso</button>
 	</div>
 </nav>
