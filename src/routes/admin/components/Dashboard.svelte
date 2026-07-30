@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { fade, scale } from 'svelte/transition';
 	import logoImg from '$lib/images/AzuwaTravel.jpeg';
+	import promoCozumel from '$lib/images/promos/PromoCozumel.jpeg';
+	import promoSecrets from '$lib/images/promos/PromoSecrets.jpeg';
+	import promoReef28 from '$lib/images/promos/Reef28.jpeg';
 	import { 
 		getPromotions, addPromotion, updatePromotion, deletePromotion,
 		getSupportImages, addSupportImage, updateSupportImage, deleteSupportImage,
@@ -49,7 +53,53 @@
 	const loadData = async () => {
 		isLoadingData = true;
 		try {
-			promotionsList = await getPromotions();
+			let dbPromos = await getPromotions();
+			
+			if (dbPromos.length === 0) {
+				console.log('Sembrando promociones por defecto desde el Dashboard...');
+				const oneYearFromNow = new Date();
+				oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+
+				// 1. Cozumel
+				const resCozumel = await fetch(promoCozumel);
+				const blobCozumel = await resCozumel.blob();
+				const fileCozumel = new File([blobCozumel], 'PromoCozumel.jpeg', { type: 'image/jpeg' });
+				await addPromotion(
+					'Cozumel Increíble',
+					'Disfruta del paraíso caribeño en Cozumel con tarifas especiales de hospedaje, snorkel guiado incluido y desayunos gratis para toda la familia.',
+					fileCozumel,
+					'',
+					oneYearFromNow
+				);
+
+				// 2. Secrets
+				const resSecrets = await fetch(promoSecrets);
+				const blobSecrets = await resSecrets.blob();
+				const fileSecrets = new File([blobSecrets], 'PromoSecrets.jpeg', { type: 'image/jpeg' });
+				await addPromotion(
+					'Secrets Resorts & Spas',
+					'Escapada de lujo todo incluido solo para adultos. Obtén hasta un 40% de descuento, cenas gourmet ilimitadas y amenidades VIP exclusivas.',
+					fileSecrets,
+					'',
+					oneYearFromNow
+				);
+
+				// 3. Reef 28
+				const resReef28 = await fetch(promoReef28);
+				const blobReef28 = await resReef28.blob();
+				const fileReef28 = new File([blobReef28], 'Reef28.jpeg', { type: 'image/jpeg' });
+				await addPromotion(
+					'The Reef 28 - Playa del Carmen',
+					'Experiencia cosmopolita All-Suites en el corazón de Playa del Carmen. Tarifas de promoción especial con barra libre premium y acceso a club de playa.',
+					fileReef28,
+					'',
+					oneYearFromNow
+				);
+
+				dbPromos = await getPromotions();
+			}
+			
+			promotionsList = dbPromos;
 			supportImagesList = await getSupportImages();
 		} catch (error) {
 			console.error('Error cargando datos de Firebase:', error);
@@ -83,6 +133,9 @@
 	let formImageFile = $state<File | null>(null);
 	let fileInputRef = $state<HTMLInputElement | null>(null);
 	let isSubmitting = $state(false);
+	
+	let imageSourceType = $state<'file' | 'url'>('file');
+	let filePreviewUrl = $state('');
 
 	const resetForm = () => {
 		formTitle = '';
@@ -90,6 +143,8 @@
 		formExpirationDate = minDateStr;
 		formImageUrl = '';
 		formImageFile = null;
+		filePreviewUrl = '';
+		imageSourceType = 'file';
 		editingItemId = null;
 		if (fileInputRef) fileInputRef.value = '';
 	};
@@ -98,6 +153,7 @@
 		const target = e.target as HTMLInputElement;
 		if (target.files && target.files.length > 0) {
 			formImageFile = target.files[0];
+			filePreviewUrl = URL.createObjectURL(formImageFile);
 		}
 	};
 
@@ -122,6 +178,14 @@
 		formExpirationDate = `${y}-${m}-${d}`;
 		
 		formImageFile = null;
+		filePreviewUrl = '';
+		
+		if (item.imageUrl && !item.imageUrl.includes('firebasestorage.googleapis.com')) {
+			imageSourceType = 'url';
+		} else {
+			imageSourceType = 'file';
+		}
+		
 		showModal = true;
 	};
 
@@ -423,8 +487,17 @@
 
 <!-- Add/Edit Modal (Firebase Integrated) -->
 {#if showModal}
-	<div class="modal-backdrop" onclick={() => !isSubmitting && (showModal = false)} role="dialog">
-		<div class="modal-content" onclick={(e) => e.stopPropagation()}>
+	<div 
+		class="modal-backdrop" 
+		onclick={() => !isSubmitting && (showModal = false)} 
+		role="dialog"
+		transition:fade={{ duration: 200 }}
+	>
+		<div 
+			class="modal-content" 
+			onclick={(e) => e.stopPropagation()}
+			transition:scale={{ duration: 200, start: 0.95 }}
+		>
 			<div class="modal-header">
 				<h3>{modalMode === 'add' ? 'Agregar Nueva' : 'Editar'} {promoSubTab === 'promos' ? 'Promoción' : 'Imagen de Soporte'}</h3>
 				<button class="modal-close" disabled={isSubmitting} onclick={() => showModal = false}>&times;</button>
@@ -470,34 +543,105 @@
 				</div>
 
 				<div class="form-group">
-					<label for="imageFile">Imagen del elemento</label>
-					{#if formImageUrl && !formImageFile}
-						<div class="current-image-preview">
-							<img src={formImageUrl} alt="Preview" />
-							<p>Imagen cargada actualmente</p>
-						</div>
-					{/if}
-					<input 
-						id="imageFile" 
-						type="file" 
-						accept="image/*"
-						bind:this={fileInputRef}
-						onchange={handleFileChange}
-						disabled={isSubmitting}
-					/>
-					<small class="form-helper">Sube un archivo de imagen directo a Firebase Storage.</small>
+					<label>Origen de la Imagen</label>
+					<div class="image-source-toggle">
+						<button 
+							type="button" 
+							class="toggle-btn" 
+							class:active={imageSourceType === 'file'} 
+							onclick={() => {
+								imageSourceType = 'file';
+							}}
+							disabled={isSubmitting}
+						>
+							Subir Archivo
+						</button>
+						<button 
+							type="button" 
+							class="toggle-btn" 
+							class:active={imageSourceType === 'url'} 
+							onclick={() => {
+								imageSourceType = 'url';
+								formImageFile = null;
+								filePreviewUrl = '';
+							}}
+							disabled={isSubmitting}
+						>
+							Enlace de Imagen
+						</button>
+					</div>
 				</div>
 
-				<div class="form-group">
-					<label for="imageUrl">O introduce URL de Imagen externa</label>
-					<input 
-						id="imageUrl" 
-						type="url" 
-						placeholder="https://ejemplo.com/imagen.jpg" 
-						bind:value={formImageUrl} 
-						disabled={isSubmitting || formImageFile !== null}
-					/>
-				</div>
+				{#if imageSourceType === 'file'}
+					<div class="form-group">
+						<label>Imagen del elemento</label>
+						
+						{#if filePreviewUrl || formImageUrl}
+							<div class="image-preview-container">
+								<img src={filePreviewUrl || formImageUrl} alt="Vista previa de la promoción" />
+								<div class="image-preview-overlay">
+									<button 
+										type="button" 
+										class="btn-remove-image" 
+										onclick={() => {
+											formImageFile = null;
+											filePreviewUrl = '';
+											formImageUrl = '';
+											if (fileInputRef) fileInputRef.value = '';
+										}}
+										disabled={isSubmitting}
+									>
+										<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<polyline points="3 6 5 6 21 6"></polyline>
+											<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+										</svg>
+										Quitar / Cambiar Imagen
+									</button>
+								</div>
+							</div>
+						{:else}
+							<div class="upload-dropzone" onclick={() => !isSubmitting && fileInputRef?.click()} role="button" tabindex="0" onkeydown={(e) => e.key === 'Enter' && !isSubmitting && fileInputRef?.click()}>
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+									<polyline points="17 8 12 3 7 8"></polyline>
+									<line x1="12" y1="3" x2="12" y2="15"></line>
+								</svg>
+								<p>Arrastra una imagen o haz clic para buscar</p>
+								<span>Formatos admitidos: JPG, PNG, WEBP</span>
+							</div>
+						{/if}
+						
+						<input 
+							id="imageFile" 
+							type="file" 
+							accept="image/*"
+							bind:this={fileInputRef}
+							onchange={handleFileChange}
+							style="display: none;"
+							disabled={isSubmitting}
+						/>
+					</div>
+				{:else}
+					<div class="form-group">
+						<label for="imageUrl">Introduce URL de Imagen externa</label>
+						<input 
+							id="imageUrl" 
+							type="url" 
+							placeholder="https://ejemplo.com/imagen.jpg" 
+							bind:value={formImageUrl} 
+							disabled={isSubmitting}
+						/>
+						
+						{#if formImageUrl}
+							<div class="form-group" style="margin-top: 0.5rem;">
+								<label>Vista previa de URL</label>
+								<div class="image-preview-container">
+									<img src={formImageUrl} alt="Vista previa externa" onerror={(e) => (e.currentTarget as HTMLImageElement).src = 'https://placehold.co/600x400?text=Error+al+cargar+imagen'} />
+								</div>
+							</div>
+						{/if}
+					</div>
+				{/if}
 
 				<div class="modal-actions">
 					<button 
@@ -763,17 +907,17 @@
 	/* Promotions Grid */
 	.promos-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-		gap: 2rem;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 1.5rem;
 	}
 
 	.dashboard-card {
 		background: #ffffff;
-		border-radius: 18px;
+		border-radius: 14px;
 		border: 1px solid #e2e8f0;
 		overflow: hidden;
-		box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-		transition: transform 0.2s, box-shadow 0.2s;
+		box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
 		display: flex;
 		flex-direction: column;
 	}
@@ -785,19 +929,25 @@
 
 	.dashboard-card:hover {
 		transform: translateY(-4px);
-		box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 	}
 
 	.card-img-wrapper {
-		height: 200px;
+		height: 160px;
 		position: relative;
 		background: #f1f5f9;
+		overflow: hidden;
 	}
 
 	.card-img-wrapper img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.dashboard-card:hover .card-img-wrapper img {
+		transform: scale(1.05);
 	}
 
 	.badge {
@@ -835,6 +985,7 @@
 	}
 
 	.card-details p {
+		
 		font-size: 0.9rem;
 		color: #64748b;
 		line-height: 1.5;
@@ -1027,6 +1178,9 @@
 		max-width: 480px;
 		box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 		overflow: hidden;
+		max-height: 85vh;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.modal-header {
@@ -1035,6 +1189,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		flex-shrink: 0;
 	}
 
 	.modal-header h3 {
@@ -1062,6 +1217,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.25rem;
+		overflow-y: auto;
+		flex-grow: 1;
 	}
 
 	.form-group {
@@ -1090,30 +1247,6 @@
 		outline: none;
 		border-color: #184a57;
 		box-shadow: 0 0 0 3px rgba(24, 74, 87, 0.15);
-	}
-
-	.current-image-preview {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		background: #f8fafc;
-		border: 1px solid #e2e8f0;
-		padding: 0.5rem;
-		border-radius: 8px;
-		margin-bottom: 0.5rem;
-	}
-
-	.current-image-preview img {
-		width: 50px;
-		height: 50px;
-		object-fit: cover;
-		border-radius: 6px;
-	}
-
-	.current-image-preview p {
-		font-size: 0.78rem;
-		color: #64748b;
-		margin: 0;
 	}
 
 	.form-helper {
@@ -1206,5 +1339,138 @@
 		to {
 			transform: rotate(360deg);
 		}
+	}
+
+	/* Image Source Toggle */
+	.image-source-toggle {
+		display: flex;
+		background: #f1f5f9;
+		padding: 0.25rem;
+		border-radius: 10px;
+		gap: 0.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.image-source-toggle .toggle-btn {
+		flex: 1;
+		padding: 0.6rem;
+		border: none;
+		border-radius: 8px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		cursor: pointer;
+		background: transparent;
+		color: #64748b;
+		transition: all 0.2s ease;
+		font-family: inherit;
+	}
+
+	.image-source-toggle .toggle-btn:hover:not(:disabled) {
+		color: #0f172a;
+	}
+
+	.image-source-toggle .toggle-btn.active {
+		background: #ffffff;
+		color: #184a57;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	}
+
+	/* Upload Dropzone */
+	.upload-dropzone {
+		border: 2px dashed #cbd5e1;
+		border-radius: 12px;
+		padding: 2rem 1.5rem;
+		text-align: center;
+		background: #fafbfd;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+		outline: none;
+	}
+
+	.upload-dropzone:hover {
+		border-color: #184a57;
+		background: rgba(24, 74, 87, 0.02);
+	}
+
+	.upload-dropzone svg {
+		color: #94a3b8;
+		transition: color 0.2s ease;
+	}
+
+	.upload-dropzone:hover svg {
+		color: #184a57;
+	}
+
+	.upload-dropzone p {
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: #475569;
+		margin: 0;
+	}
+
+	.upload-dropzone span {
+		font-size: 0.75rem;
+		color: #94a3b8;
+	}
+
+	/* Image Preview Area */
+	.image-preview-container {
+		position: relative;
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid #cbd5e1;
+		background: #f8fafc;
+		aspect-ratio: 16 / 9;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-height: 200px;
+	}
+
+	.image-preview-container img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.image-preview-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(15, 23, 42, 0.65);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		transition: opacity 0.2s ease;
+		backdrop-filter: blur(2px);
+	}
+
+	.image-preview-container:hover .image-preview-overlay {
+		opacity: 1;
+	}
+
+	.btn-remove-image {
+		background: #ef4444;
+		color: #ffffff;
+		border: none;
+		border-radius: 8px;
+		padding: 0.55rem 1.1rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.btn-remove-image:hover:not(:disabled) {
+		background: #dc2626;
+		transform: scale(1.03);
 	}
 </style>

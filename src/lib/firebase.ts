@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 import { 
 	PUBLIC_FIREBASE_API_KEY,
 	PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -26,8 +27,9 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 
 // Initialize Services
-export const db = getFirestore(app);
+export const db = getFirestore(app, "azuwatravel");
 export const storage = getStorage(app);
+export const auth = getAuth(app);
 
 // Initialize Analytics helper (client-side only)
 export const getAnalyticsInstance = async () => {

@@ -50,7 +50,7 @@ const docToItem = (docData: any) => {
 
 // --- PROMOTIONS CRUD ---
 export const getPromotions = async (): Promise<PromoItem[]> => {
-	const q = query(collection(db, 'promotions'), orderBy('createdAt', 'desc'));
+	const q = query(collection(db, 'Promos'), orderBy('createdAt', 'desc'));
 	const snap = await getDocs(q);
 	return snap.docs.map(docToItem) as PromoItem[];
 };
@@ -78,7 +78,7 @@ export const addPromotion = async (
 		createdAt: Timestamp.now()
 	};
 
-	const docRef = await addDoc(collection(db, 'promotions'), newPromo);
+	const docRef = await addDoc(collection(db, 'Promos'), newPromo);
 	return {
 		id: docRef.id,
 		...newPromo,
@@ -103,7 +103,7 @@ export const updatePromotion = async (
 		imageUrl = await getDownloadURL(uploadResult.ref);
 	}
 
-	const promoRef = doc(db, 'promotions', id);
+	const promoRef = doc(db, 'Promos', id);
 	await updateDoc(promoRef, {
 		title,
 		description,

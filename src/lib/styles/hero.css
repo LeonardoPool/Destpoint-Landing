@@ -1455,7 +1455,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 800px;
-  height: 510px;
+  height: 430px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1464,14 +1464,18 @@ body {
 
 .stack-card-wrapper {
   position: absolute;
-  width: 380px;
-  height: 475px;
+  width: 310px;
+  height: 400px;
   transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), 
               opacity 0.7s, 
               z-index 0.7s, 
               filter 0.7s;
   cursor: pointer;
   transform-style: preserve-3d;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate3d(0, 0, -120px) scale(0.7);
 }
 
 .stack-card {
@@ -1489,27 +1493,35 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
+}
+
+.stack-card-wrapper.active:hover .stack-card-img {
+  transform: scale(1.05);
 }
 
 /* 3D Stack Classes */
 .stack-card-wrapper.active {
   transform: translate3d(0, 0, 80px) scale(1);
   opacity: 1;
+  pointer-events: auto;
   z-index: 10;
   cursor: default;
   filter: none;
 }
 
 .stack-card-wrapper.left {
-  transform: translate3d(-180px, 0, -80px) scale(0.85);
+  transform: translate3d(-150px, 0, -80px) scale(0.85);
   opacity: 0.65;
+  pointer-events: auto;
   z-index: 5;
   filter: brightness(0.9);
 }
 
 .stack-card-wrapper.right {
-  transform: translate3d(180px, 0, -80px) scale(0.85);
+  transform: translate3d(150px, 0, -80px) scale(0.85);
   opacity: 0.65;
+  pointer-events: auto;
   z-index: 5;
   filter: brightness(0.9);
 }
@@ -1652,20 +1664,20 @@ body {
   }
 
   .cards-stack {
-    height: 420px;
-  }
-
-  .stack-card-wrapper {
-    width: 280px;
     height: 350px;
   }
 
+  .stack-card-wrapper {
+    width: 240px;
+    height: 300px;
+  }
+
   .stack-card-wrapper.left {
-    transform: translate3d(-100px, 0, -80px) scale(0.85);
+    transform: translate3d(-80px, 0, -80px) scale(0.85);
   }
 
   .stack-card-wrapper.right {
-    transform: translate3d(100px, 0, -80px) scale(0.85);
+    transform: translate3d(80px, 0, -80px) scale(0.85);
   }
 }
 
@@ -1692,20 +1704,20 @@ body {
   }
 
   .cards-stack {
-    height: 320px;
+    height: 280px;
   }
 
   .stack-card-wrapper {
-    width: 220px;
-    height: 275px;
+    width: 180px;
+    height: 225px;
   }
 
   .stack-card-wrapper.left {
-    transform: translate3d(-60px, 0, -80px) scale(0.85);
+    transform: translate3d(-50px, 0, -80px) scale(0.85);
   }
 
   .stack-card-wrapper.right {
-    transform: translate3d(60px, 0, -80px) scale(0.85);
+    transform: translate3d(50px, 0, -80px) scale(0.85);
   }
 
   .lightbox-backdrop {

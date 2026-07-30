@@ -29,7 +29,7 @@
 			{#if showMore}
 				<div transition:slide={{ duration: 400 }}>
 					<p class="about-lead">
-						Además de viajes vacacionales, contamos con servicios especializados para la planeación de bodas destino, viajes y celebraciones de quince años, lunas de miel, aniversarios y experiencias para grupos. Para el sector empresarial, desarrollamos viajes de incentivo, reuniones, convenciones y programas corporativos diseñados de acuerdo con los objetivos, características y presupuesto de cada organización.
+						Además de viajes vacacionales, contamos con servicios especializados para la planeación de bodas destino, viajes y celebraciones de quince años, lunas de miel, aniversarios y experiencias para grupos. Para el sector empresarial, desarrollamos viajes de incentivo, reuniones, convenciones y programas corporativos diseñados de acuerdo con los objetivos, characteristics y presupuesto de cada organización.
 					</p>
 
 					<p class="about-lead">
@@ -55,17 +55,6 @@
 					</svg>
 				</button>
 			</div>
-		</div>
-	</section>
-
-	<section class="about-cta">
-		<h2>Tu agencia vende. Nosotros operamos.</h2>
-		<p>
-			Construimos experiencias memorables con estructura sólida, para que puedas enfocarte en crecer tu cartera de clientes.
-		</p>
-		<div class="about-cta-actions">
-			<a href="/" class="about-btn about-btn--primary">Volver al inicio</a>
-			<a href="/community" class="about-btn about-btn--ghost">Conocer comunidad</a>
 		</div>
 	</section>
 </main>
