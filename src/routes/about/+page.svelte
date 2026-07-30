@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Sobre Nosotros</title>
+	<title>Sobre Nosotros — AzuwaTravel</title>
 </svelte:head>
 
 <Navbar currentPath="/about" />

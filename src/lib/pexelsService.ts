@@ -1,4 +1,4 @@
-import { PUBLIC_PEXELS_API_KEY } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 
 /**
  * Searches photos on Pexels using the configured API Key.
@@ -7,7 +7,8 @@ import { PUBLIC_PEXELS_API_KEY } from '$env/static/public';
  * @returns A promise that resolves to an array of image URL strings.
  */
 export async function searchPhotos(query: string, perPage: number = 1): Promise<string[]> {
-	if (!PUBLIC_PEXELS_API_KEY) {
+	const apiKey = env.PUBLIC_PEXELS_API_KEY;
+	if (!apiKey) {
 		console.warn('PUBLIC_PEXELS_API_KEY is not configured in environment variables.');
 		return [];
 	}
@@ -17,7 +18,7 @@ export async function searchPhotos(query: string, perPage: number = 1): Promise<
 			`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${perPage}`,
 			{
 				headers: {
-					Authorization: PUBLIC_PEXELS_API_KEY
+					Authorization: apiKey
 				}
 			}
 		);

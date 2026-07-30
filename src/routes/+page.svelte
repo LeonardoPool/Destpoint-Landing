@@ -219,7 +219,7 @@
 </script>
 
 <svelte:head>
-	<title>Destpoint — Operadora Mayorista</title>
+	<title>AzuwaTravel — Agencia de viajes</title>
 </svelte:head>
 
 <!-- ─── Navbar ──────────────────────────────────────────────── -->
