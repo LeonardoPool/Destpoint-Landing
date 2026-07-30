@@ -6,8 +6,8 @@
 </script>
 
 <svelte:head>
-	<title>Panel de Administración — Destpoint</title>
-	<meta name="description" content="Portal de administración de Destpoint Operadora Mayorista para gestionar promociones y artículos del blog." />
+	<title>Panel de Administración — AzuwaTravel</title>
+	<meta name="description" content="Portal de administración de AzuwaTravel Operadora Mayorista para gestionar promociones y artículos del blog." />
 </svelte:head>
 
 {#if !isLoggedIn}
