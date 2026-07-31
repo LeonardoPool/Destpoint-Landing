@@ -45,16 +45,16 @@
 				</svg>
 			</button>
 			<ul class="dropdown-menu">
-				<li><a href="/servicios/hoteleria" onclick={() => isMenuOpen = false}>Hotelería</a></li>
-				<li><a href="/servicios/tours" onclick={() => isMenuOpen = false}>Tours</a></li>
-				<li><a href="/servicios/traslados" onclick={() => isMenuOpen = false}>Traslados</a></li>
-				<li><a href="/servicios/avion" onclick={() => isMenuOpen = false}>Avión</a></li>
-				<li><a href="/servicios/parques" onclick={() => isMenuOpen = false}>Parques temáticos</a></li>
-				<li><a href="/servicios/cruceros" onclick={() => isMenuOpen = false}>Cruceros</a></li>
-				<li><a href="/servicios/paquetes-europeos" onclick={() => isMenuOpen = false}>Paquetes europeos</a></li>
+				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Hotelería</a></li>
+				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Tours</a></li>
+				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Traslados</a></li>
+				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Avión</a></li>
+				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Parques temáticos</a></li>
+				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Cruceros</a></li>
+				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Paquetes europeos</a></li>
 			</ul>
 		</li>
-		<li><a href="/blog" onclick={() => isMenuOpen = false}>Blog</a></li>
+		<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Blog</a></li>
 		<li><a href="/contact" class:active={currentPath === '/contact'} onclick={() => isMenuOpen = false}>Contacto</a></li>
 		
 		<!-- Cloned Login Action for Mobile view -->
