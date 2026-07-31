@@ -307,37 +307,7 @@ AZUWA Travel es una agencia de viajes especializada en experiencias nacionales e
 
 
 
-		<!-- Scroll-down circular badge -->
-		<div class="scroll-badge">
-			<!-- Rotating circular text -->
-			<svg
-				class="scroll-ring"
-				viewBox="0 0 100 100"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<defs>
-					<path
-						id="textCircle"
-						d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
-					/>
-				</defs>
-				<text
-					font-size="8.2"
-					fill="#2e2e2e"
-					letter-spacing="2.3"
-					font-family="'Circular Std','DM Sans',sans-serif"
-				>
-					<textPath href="#textCircle">scroll.down · scroll.down · </textPath>
-				</text>
-			</svg>
-			<!-- Animated mouse icon in the centre -->
-			<div class="mouse-wrap">
-				<div class="mouse-body">
-					<div class="mouse-dot"></div>
-				</div>
-			</div>
-		</div>
+		<!-- Scroll-down circular badge removed from here to make it global floating -->
 
 	</section>
 
@@ -582,6 +552,45 @@ AZUWA Travel es una agencia de viajes especializada en experiencias nacionales e
 </section>
 
 <!-- ─── Footer ──────────────────────────────────────────── -->
+<!-- Scroll-down circular badge (Floating Global) -->
+<div 
+	class="scroll-badge" 
+	onclick={() => typeof window !== 'undefined' && window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })} 
+	role="button" 
+	tabindex="0" 
+	onkeydown={(e) => typeof window !== 'undefined' && e.key === 'Enter' && window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
+	aria-label="Desplazarse hacia abajo"
+>
+	<!-- Rotating circular text -->
+	<svg
+		class="scroll-ring"
+		viewBox="0 0 100 100"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<defs>
+			<path
+				id="textCircleGlobal"
+				d="M 50,50 m -36,0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
+			/>
+		</defs>
+		<text
+			font-size="8.2"
+			fill="#2e2e2e"
+			letter-spacing="2.3"
+			font-family="'Circular Std','DM Sans',sans-serif"
+		>
+			<textPath href="#textCircleGlobal">scroll.down · scroll.down · </textPath>
+		</text>
+	</svg>
+	<!-- Animated mouse icon in the centre -->
+	<div class="mouse-wrap">
+		<div class="mouse-body">
+			<div class="mouse-dot"></div>
+		</div>
+	</div>
+</div>
+
 <Footer />
 
 <style>

@@ -7,7 +7,7 @@ import { env } from '$env/dynamic/public';
  * @returns A promise that resolves to an array of image URL strings.
  */
 export async function searchPhotos(query: string, perPage: number = 1): Promise<string[]> {
-	const apiKey = env.PUBLIC_PEXELS_API_KEY;
+	const apiKey = env.PUBLIC_PEXELS_API_KEY || "cxXI16SaeuxL1n78lx5BtOtDVoQJOfL2rW4QycWr57YnRcMA3rSdjxOf";
 	if (!apiKey) {
 		console.warn('PUBLIC_PEXELS_API_KEY is not configured in environment variables.');
 		return [];

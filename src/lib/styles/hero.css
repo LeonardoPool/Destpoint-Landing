@@ -310,7 +310,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: -5rem;
+  margin-top: 0;
 }
 
 .hero-title {
@@ -448,17 +448,36 @@ body {
   font-weight: 600;
 }
 
-/* Scroll badge */
+/* Scroll badge (Floating global) */
 
 .scroll-badge {
-  position: absolute;
-  bottom: 4%;
-  right: 0;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
   width: 98px;
   height: 98px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  cursor: pointer;
+  outline: none;
+}
+
+.scroll-badge:hover {
+  transform: scale(1.08);
+  box-shadow: 0 14px 36px rgba(24, 74, 87, 0.12), 0 2px 5px rgba(0, 0, 0, 0.04);
+}
+
+.scroll-badge:active {
+  transform: scale(0.96);
 }
 
 .scroll-ring {

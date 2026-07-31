@@ -7,13 +7,13 @@ import { env } from '$env/dynamic/public';
 import { browser } from '$app/environment';
 
 const firebaseConfig = {
-	apiKey: env.PUBLIC_FIREBASE_API_KEY,
-	authDomain: env.PUBLIC_FIREBASE_AUTH_DOMAIN,
-	projectId: env.PUBLIC_FIREBASE_PROJECT_ID,
-	storageBucket: env.PUBLIC_FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-	appId: env.PUBLIC_FIREBASE_APP_ID,
-	measurementId: env.PUBLIC_FIREBASE_MEASUREMENT_ID
+	apiKey: env.PUBLIC_FIREBASE_API_KEY || "AIzaSyB7IpuZmc9G_xtYeRX_FerySy0GAZcfYbc",
+	authDomain: env.PUBLIC_FIREBASE_AUTH_DOMAIN || "azuwatravel-49545.firebaseapp.com",
+	projectId: env.PUBLIC_FIREBASE_PROJECT_ID || "azuwatravel-49545",
+	storageBucket: env.PUBLIC_FIREBASE_STORAGE_BUCKET || "azuwatravel-49545.firebasestorage.app",
+	messagingSenderId: env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "197254677488",
+	appId: env.PUBLIC_FIREBASE_APP_ID || "1:197254677488:web:0e7cb1664aa8ea03ebd335",
+	measurementId: env.PUBLIC_FIREBASE_MEASUREMENT_ID || "G-LR4FYD4CMC"
 };
 
 export let app: any = null;
@@ -21,8 +21,8 @@ export let db: any = null;
 export let storage: any = null;
 export let auth: any = null;
 
-// Initialize Firebase only on client-side browser if configuration exists
-if (browser && env.PUBLIC_FIREBASE_API_KEY) {
+// Initialize Firebase only on client-side browser
+if (browser) {
 	try {
 		app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 		db = getFirestore(app, "azuwatravel");
