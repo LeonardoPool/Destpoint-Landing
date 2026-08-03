@@ -45,16 +45,16 @@
 				</svg>
 			</button>
 			<ul class="dropdown-menu">
-				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Hotelería</a></li>
-				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Tours</a></li>
-				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Traslados</a></li>
-				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Avión</a></li>
-				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Parques temáticos</a></li>
-				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Cruceros</a></li>
-				<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Paquetes europeos</a></li>
+				<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Hotelería</a></li>
+				<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Tours</a></li>
+				<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Traslados</a></li>
+				<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Avión</a></li>
+				<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Parques temáticos</a></li>
+				<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Cruceros</a></li>
+				<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Paquetes europeos</a></li>
 			</ul>
 		</li>
-		<li><a href="#" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Blog</a></li>
+		<li><a href="javascript:void(0)" onclick={(e) => { e.preventDefault(); isMenuOpen = false; }}>Blog</a></li>
 		<li><a href="/contact" class:active={currentPath === '/contact'} onclick={() => isMenuOpen = false}>Contacto</a></li>
 		
 		<!-- Cloned Login Action for Mobile view -->

@@ -37,19 +37,19 @@
 				<h4 class="footer-heading">Empresa</h4>
 				<ul>
 					<li><a href="/about">Sobre Nosotros</a></li>
-					<li><a href="#" onclick={(e) => e.preventDefault()}>Blog</a></li>
-					<li><a href="#" onclick={(e) => e.preventDefault()}>Clientes</a></li>
-					<li><a href="#" onclick={(e) => e.preventDefault()}>Paquetes</a></li>
-					<li><a href="#" onclick={(e) => e.preventDefault()}>Comunidad</a></li>
+					<li><a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Blog</a></li>
+					<li><a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Clientes</a></li>
+					<li><a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Paquetes</a></li>
+					<li><a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Comunidad</a></li>
 				</ul>
 			</div>
 
 			<div class="footer-column">
 				<h4 class="footer-heading">Ayuda</h4>
 				<ul>
-					<li><a href="#" onclick={(e) => e.preventDefault()}>Atención al Cliente</a></li>
-					<li><a href="#" onclick={(e) => e.preventDefault()}>Preguntas Frecuentes</a></li>
-					<li><a href="#" onclick={(e) => e.preventDefault()}>Política de Devolución</a></li>
+					<li><a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Atención al Cliente</a></li>
+					<li><a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Preguntas Frecuentes</a></li>
+					<li><a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Política de Devolución</a></li>
 				</ul>
 			</div>
 		</div>
@@ -58,13 +58,13 @@
 		<div class="footer-social">
 			<h4 class="footer-heading">Siguenos</h4>
 			<div class="social-links">
-				<a href="#" onclick={(e) => e.preventDefault()} class="social-link" aria-label="Facebook">
+				<a href="javascript:void(0)" onclick={(e) => e.preventDefault()} class="social-link" aria-label="Facebook">
 					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
 					</svg>
 					Facebook
 				</a>
-				<a href="#" onclick={(e) => e.preventDefault()} class="social-link" aria-label="Instagram">
+				<a href="javascript:void(0)" onclick={(e) => e.preventDefault()} class="social-link" aria-label="Instagram">
 					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
 						<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
@@ -72,7 +72,7 @@
 					</svg>
 					Instagram
 				</a>
-				<a href="#" onclick={(e) => e.preventDefault()} class="social-link" aria-label="Twitter">
+				<a href="javascript:void(0)" onclick={(e) => e.preventDefault()} class="social-link" aria-label="Twitter">
 					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
 					</svg>
@@ -89,9 +89,9 @@
 	<div class="footer-bottom">
 		<p class="footer-copyright">2026 AzuwaTravel. All right reserved. HANDCRAFTED</p>
 		<div class="footer-legal">
-			<a href="#" onclick={(e) => e.preventDefault()}>Privacy Policy</a>
-			<a href="#" onclick={(e) => e.preventDefault()}>Terms of Service</a>
-			<a href="#" onclick={(e) => e.preventDefault()}>Cookies Settings</a>
+			<a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Privacy Policy</a>
+			<a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Terms of Service</a>
+			<a href="javascript:void(0)" onclick={(e) => e.preventDefault()}>Cookies Settings</a>
 		</div>
 	</div>
 </footer>
