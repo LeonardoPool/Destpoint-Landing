@@ -490,7 +490,7 @@
     <div class="promotions-section-right">
       <!-- Active Promotion Info (Above the stack) -->
       <div class="active-promo-info">
-        <span class="promo-badge">OFERTA EXCLUSIVA</span>
+        <!-- <span class="promo-badge">OFERTA EXCLUSIVA</span> -->
         <h3 class="promo-title">
           {promotions[currentPromoIndex]?.title || ""}
         </h3>
@@ -642,78 +642,16 @@
 <!-- ─── Explore Section ──────────────────────────────────── -->
 <section class="explore">
   <div class="explore-container">
-    <!-- Left column -->
-    <div class="explore-left">
-      <div class="explore-image-wrapper">
-        {#if exploreImage}
-          <img
-            src={exploreImage}
-            alt="Explore destination"
-            class="explore-image-placeholder"
-            style="object-fit: cover; width: 100%; height: 100%;"
-          />
-        {:else}
-          <div class="explore-image-placeholder"></div>
-        {/if}
-
-        <!-- Resort card overlay -->
-        <div class="resort-card">
-          {#if resortThumbImage}
-            <img
-              src={resortThumbImage}
-              alt={resort.name}
-              class="resort-thumb"
-              style="object-fit: cover;"
-            />
-          {:else}
-            <div class="resort-thumb"></div>
-          {/if}
-          <div class="resort-info">
-            <h3 class="resort-name">{resort.name}</h3>
-            <div class="resort-meta">
-              <div class="resort-rating">
-                <svg
-                  class="star-icon"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <polygon
-                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-                  />
-                </svg>
-                <span>({resort.rating})</span>
-              </div>
-              <p class="resort-price">
-                Starts from <span>${resort.price}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Guide badge overlay -->
-        <div class="guide-badge">
-          {#if guideAvatarImage}
-            <img
-              src={guideAvatarImage}
-              alt={resort.guide}
-              class="guide-avatar"
-              style="object-fit: cover;"
-            />
-          {:else}
-            <div class="guide-avatar"></div>
-          {/if}
-          <div>
-            <p class="guide-name">{resort.guide}</p>
-            <p class="guide-title">{resort.guideTitle}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right column -->
-    <div class="explore-right">
+    {#if exploreImage}
+      <img
+        src={exploreImage}
+        alt="Explore destination"
+        class="explore-image-placeholder"
+      />
+    {:else}
+      <div class="explore-image-placeholder"></div>
+    {/if}
+    <div class="glass-card">
       <h2 class="explore-title">Inspírate para tu próxima aventura</h2>
       <p class="explore-desc">
         Descubre destinos, consejos de viaje, experiencias auténticas y
@@ -774,8 +712,38 @@
 
 <style>
   .booking-soon-section {
-    padding: 6rem 5rem;
-    background: #ffffff;
+    padding: 10rem 5rem;
+    background-color: #f4fafd;
+
+    /* Overlapping radial gradients to create an organic, painted feel */
+    background-image: 
+    /* Top left: Soft, desaturated turquoise */
+      radial-gradient(
+        circle at 10% 10%,
+        rgba(23, 233, 223, 0.25) 0%,
+        transparent 50%
+      ),
+      /* Center right: Pale aquamarine */
+        radial-gradient(
+          circle at 85% 25%,
+          rgba(127, 255, 212, 0.291) 0%,
+          transparent 55%
+        ),
+      /* Bottom left: Soft baby blue (our light "navy" alternative) */
+        radial-gradient(
+          circle at 15% 90%,
+          rgba(135, 188, 228, 0.3) 0%,
+          transparent 60%
+        ),
+      /* Bottom right: Warm seashell/sand (New balancing color) */
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(248, 237, 220, 0.782) 0%,
+          transparent 55%
+        );
+
+    background-size: cover;
+    background-position: center;
     text-align: center;
   }
 
@@ -791,10 +759,15 @@
     }
   }
 
+  .booking-soon-container {
+    width: 100%;
+    height: 100%;
+  }
+
   .booking-soon-title {
     font-size: clamp(2rem, 5vw, 2.8rem);
     font-weight: 700;
-    color: #0c0c0c;
+    color: #01173b;
     margin-bottom: 3rem;
     letter-spacing: -0.02em;
   }

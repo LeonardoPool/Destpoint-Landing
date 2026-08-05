@@ -48,7 +48,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.35rem 5rem;
+  padding: 0.5rem 5rem;
+  background-color: transparent;
 }
 
 @media (max-width: 1024px) {
@@ -188,7 +189,7 @@ body {
   justify-content: center;
   text-decoration: none;
   padding: 0.52rem 1.55rem;
-  border: 1.5px solid #cecece;
+  border: 1.5px solid rgb(146, 146, 146);
   border-radius: 8px;
   background: transparent;
   font-family: inherit;
@@ -317,7 +318,7 @@ body {
   font-size: clamp(3rem, 4.5vw, 4.8rem);
   font-weight: 700;
   line-height: 1.04;
-  color: #0c0c0c;
+  color: #01173b;
   max-width: none;
   margin-bottom: 2rem;
   text-align: left;
@@ -926,8 +927,43 @@ body {
 /* ─── EXPLORE ────────────────────────────────────────── */
 
 .explore {
-  padding: 4rem 5rem;
-  background: #ffffff;
+  padding: 0;
+  width: 100%;
+  height: clamp(600px, 850px, 1000px);
+}
+
+.glass-card {
+  position: absolute;
+  top: 20%;
+  left: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 400px;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(16px); /* Required for Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+
+  /* Outer drop shadow for elevation + inner glow for the glass edge */
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(127, 255, 212, 0.05);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.6s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(23, 233, 224, 0.3);
 }
 
 @media (max-width: 1024px) {
@@ -938,7 +974,8 @@ body {
 
 @media (max-width: 480px) {
   .explore {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
+    /* max-width: 100%; */
   }
 
   .explore-title {
@@ -949,31 +986,20 @@ body {
     font-size: 0.8rem;
   }
 
-  .explore-image-wrapper {
+  /*   .explore-image-wrapper {
     max-width: 100%;
-  }
+  } */
 }
 
 .explore-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-}
-
-.explore-left {
   position: relative;
-}
-
-.explore-image-wrapper {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  aspect-ratio: 1 / 1.2;
-  max-width: 550px;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
 }
 
 .explore-image-placeholder {
+  display: block;
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 100%);
@@ -1044,72 +1070,26 @@ body {
   font-weight: 600;
 }
 
-/* Guide badge */
-
-.guide-badge {
-  position: absolute;
-  bottom: 1.2rem;
-  left: 1.2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 0.8rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  z-index: 10;
-}
-
-.guide-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  flex-shrink: 0;
-}
-
-.guide-name {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #0c0c0c;
-  line-height: 1.2;
-}
-
-.guide-title {
-  font-size: 0.7rem;
-  color: #9e9e9e;
-}
-
-/* Right column */
-
-.explore-right {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
 .explore-title {
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 700;
   line-height: 1.25;
-  color: #0c0c0c;
+  color: #ffffff;
 }
 
 .explore-desc {
-  font-size: 0.95rem;
   line-height: 1.7;
-  margin-bottom: 2rem;
-  color: #666;
+  margin-bottom: 1rem;
+  color: #f5f3f3;
 }
 
 .btn-explore {
   width: fit-content;
   padding: 0.65rem 2rem;
-  align-self: flex-end;
   margin-right: 2rem;
   border: none;
   border-radius: 8px;
-  background: #184a57;
+  background: #0f313a;
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
@@ -1119,7 +1099,7 @@ body {
 }
 
 .btn-explore:hover {
-  background: #0f3a47;
+  background: #0d2830;
 }
 
 @media (max-width: 1100px) {
@@ -1423,10 +1403,10 @@ body {
 }
 
 .section-main-title {
-  font-size: clamp(2.8rem, 3.2vw, 4rem);
+  font-size: clamp(2.8rem, 3.6vw, 4rem);
   font-weight: 700;
-  color: #0c0c0c;
-  margin-bottom: 2.8rem;
+  color: #01173b;
+  margin-bottom: 3.2rem;
 }
 
 /* Active Promotion Info details */
