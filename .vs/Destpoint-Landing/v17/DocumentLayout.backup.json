@@ -22,11 +22,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 190,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
@@ -36,7 +40,7 @@
               "RelativeDocumentMoniker": "src\\routes\\\u002Bpage.svelte",
               "ToolTip": "C:\\Users\\regim\\source\\repos\\Destpoint-Landing\\src\\routes\\\u002Bpage.svelte",
               "RelativeToolTip": "src\\routes\\\u002Bpage.svelte",
-              "ViewState": "AgIAADAAAAAAAAAAAAAiwEQAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAiwHEAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-08-04T17:32:06.211Z",
               "EditorCaption": ""
@@ -64,8 +68,7 @@
               "RelativeToolTip": "src\\app.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2026-08-04T17:31:23.592Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-08-04T17:31:23.592Z"
             }
           ]
         },

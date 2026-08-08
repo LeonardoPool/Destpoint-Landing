@@ -181,7 +181,7 @@
 </nav>
 
 <style>
-.navbar {
+  .navbar {
     /* Keep navbar visually transparent so underlying sections show through.
        Positioning it at the top keeps it above content (z-index) so the
        translucent backgrounds below are visible. */
@@ -198,7 +198,7 @@
     position: relative;
     display: inline-block;
   }
-  
+
   /* Show the dropdown menu on hover */
   .nav-dropdown-container:hover .dropdown-menu {
     display: block;
@@ -206,11 +206,11 @@
     visibility: visible;
     transform: translateX(-50%) translateY(0);
   }
-  
+
   .dropdown-arrow {
     transition: transform 0.2s ease;
   }
-  
+
   .nav-dropdown-container:hover .dropdown-arrow {
     transform: rotate(180deg);
   }
@@ -221,11 +221,11 @@
     left: 50%;
     transform: translateX(-50%) translateY(10px);
     /* Translucent background so underlying section shows through */
-    background: rgba(255,255,255,0.75);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(6px);
     border-radius: 12px;
     box-shadow: 0 12px 30px rgba(3, 18, 34, 0.08);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     padding: 0.6rem;
     list-style: none;
     min-width: 180px;
@@ -261,7 +261,7 @@
   }
 
   .dropdown-menu li a:hover {
-    background-color: rgba(24,74,87,0.06);
+    background-color: rgba(24, 74, 87, 0.06);
     color: #184a57; /* keep blue accent on hover */
   }
 
@@ -292,6 +292,12 @@
 
   .mobile-only-action {
     display: none;
+  }
+
+  @media (max-width: 480px) {
+    .nav-links {
+      width: 100%; /* Fullscreen width drawer for extremely small phones */
+    }
   }
 
   @media (max-width: 768px) {
@@ -383,12 +389,6 @@
 
     .btn-login-mobile:hover {
       background-color: #123741;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .nav-links {
-      width: 100%; /* Fullscreen width drawer for extremely small phones */
     }
   }
 </style>

@@ -15,6 +15,10 @@ body {
   font-size: 16px;
 }
 
+img {
+  display: block;
+}
+
 /* ─── TV / LARGE SCREENS (1600px+) ────────────────── */
 @media (min-width: 1600px) {
   .navbar {
@@ -48,63 +52,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 5rem;
+  width: 100%;
+  padding-top: 1rem;
+  padding-inline: clamp(2rem, 5vw, 4rem);
   background-color: transparent;
-}
-
-@media (max-width: 1024px) {
-  .navbar {
-    padding: 1.2rem 3rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    padding: 1rem 1.5rem;
-  }
-
-  .nav-links {
-    gap: 1.5rem;
-  }
-
-  .nav-links a,
-  .nav-pkg-btn {
-    font-size: 0.8rem;
-  }
-
-  .btn-login,
-  .btn-signup {
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar {
-    padding: 0.8rem 1rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .logo-name {
-    display: none;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .nav-actions {
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  .btn-login,
-  .btn-signup {
-    padding: 0.35rem 0.75rem;
-    font-size: 0.7rem;
-  }
 }
 
 .logo {
@@ -123,14 +74,14 @@ body {
 }
 
 .logo-img {
-  height: 100px;
+  height: 80px;
   width: auto;
   display: block;
   border-radius: 90%;
 }
 
 .hero-logo {
-  height: 120px;
+  height: 100px;
   width: auto;
   display: block;
   margin-bottom: 1.4rem;
@@ -188,8 +139,7 @@ body {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  padding: 0.52rem 1.55rem;
-  border: 1.5px solid rgb(146, 146, 146);
+  border: 2.1px solid rgb(146, 146, 146);
   border-radius: 8px;
   background: transparent;
   font-family: inherit;
@@ -206,7 +156,6 @@ body {
 }
 
 .btn-signup {
-  padding: 0.52rem 1.55rem;
   border-radius: 8px;
   border: none;
   background: #111;
@@ -218,82 +167,133 @@ body {
   transition: background 0.2s;
 }
 
+.btn-login,
+.btn-signup {
+  padding-inline: clamp(0.5rem, 1.2rem, 1.5rem);
+  padding-block: clamp(0.5rem, 0.6rem, 0.9rem);
+}
+
 .btn-signup:hover {
   background: #333;
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .logo-name {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .btn-login,
+  .btn-signup {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1.5rem;
+  }
+
+  .nav-links a,
+  .nav-pkg-btn {
+    font-size: 0.8rem;
+  }
+
+  .btn-login,
+  .btn-signup {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .navbar {
+    gap: 2rem;
+  }
 }
 
 /* ─── HERO ───────────────────────────────────────────── */
 
 .hero {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 2rem 5rem 1.5rem;
-  min-height: 0;
+  padding-top: 3.5rem;
+  padding-inline: clamp(1rem, 2rem, 2.2rem);
+  padding-bottom: 1rem;
   overflow: hidden;
 }
 
-@media (max-width: 1200px) {
-  .hero {
-    padding: 2rem 3rem;
-    min-height: 0;
-  }
+.hero-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  justify-content: center;
+  gap: 2rem;
 }
 
-@media (max-width: 768px) {
-  .hero {
-    flex-direction: column;
-    padding: 1.5rem 1.5rem 2rem;
-    gap: 2rem;
-    min-height: 0;
+/* Left column */
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-title {
+  font-weight: 700;
+  line-height: 1.04;
+  color: #01173b;
+  margin-bottom: 2rem;
+  text-align: left;
+  margin-inline: 0;
+  margin-bottom: 1.5rem;
+}
+
+.hero-desc {
+  font-size: 0.8rem;
+  line-height: 1.72;
+  color: #666;
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+/* Right column */
+
+.hero-img {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  object-fit: contain;
+  object-position: top;
+  display: block;
+  border-radius: 28px;
+}
+
+@media (min-width: 480px) {
+  .hero-container {
+    gap: clamp(2rem, 2.5rem, 4rem);
   }
 
   .hero-title {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    max-width: none;
-  }
-
-  .hero-right {
-    min-height: 300px;
-    max-width: 100%;
-  }
-
-  .hero-img {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero {
-    padding: 1rem 1rem 1.5rem;
-    gap: 1.5rem;
-  }
-
-  .hero-title {
-    font-size: clamp(1.45rem, 3.4vw, 2rem);
-    margin-bottom: 1rem;
+    font-size: minmax(0.8rem, 0.95vw);
     max-width: 100%;
   }
 
   .hero-desc {
-    font-size: 0.8rem;
     max-width: 100%;
     margin-bottom: 1.5rem;
-  }
-
-  .follow-us {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .hero-right {
-    min-height: 250px;
-  }
-
-  .dest-card {
-    padding: 0.7rem 0.8rem;
-    min-width: 200px;
+    font-size: 0.9rem;
   }
 
   .scroll-badge {
@@ -302,99 +302,20 @@ body {
   }
 }
 
-/* Left column */
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
 
-.hero-left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  margin-top: 0;
+  .hero-desc {
+    font-size: 1rem;
+  }
 }
 
-.hero-title {
-  font-size: clamp(3rem, 4.5vw, 4.8rem);
-  font-weight: 700;
-  line-height: 1.04;
-  color: #01173b;
-  max-width: none;
-  margin-bottom: 2rem;
-  text-align: left;
-  margin-inline: clamp(2rem, 3vw, 5rem);
-}
-
-.hero-desc {
-  font-size: 0.94rem;
-  line-height: 1.72;
-  color: #666;
-  max-width: 480px;
-  margin-bottom: 3.5rem;
-  text-align: justify;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.follow-us {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-
-.follow-label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #333;
-}
-
-.socials {
-  display: flex;
-  gap: 0.65rem;
-}
-
-.social-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.5px solid #dedede;
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: #555;
-  padding: 0;
-  transition:
-    border-color 0.2s,
-    color 0.2s;
-}
-
-.social-btn:hover {
-  border-color: #aaa;
-  color: #111;
-}
-
-/* Right column */
-
-.hero-right {
-  flex: 1.15;
-  position: relative;
-  align-self: stretch;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  min-height: 560px;
-}
-
-.hero-img {
-  width: 100%;
-  max-width: 540px;
-  height: 100%;
-  object-fit: contain;
-  object-position: top;
-  display: block;
-  border-radius: 28px;
+@media (min-width: 1024px) {
+  .hero {
+    padding-inline: clamp(4rem, 5rem, 5rem);
+  }
 }
 
 /* Destination card */
@@ -929,25 +850,36 @@ body {
 .explore {
   padding: 0;
   width: 100%;
-  height: clamp(600px, 850px, 1000px);
+  height: 100%;
+}
+
+.explore-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 400px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  font-size: 0.95rem;
 }
 
 .glass-card {
   position: absolute;
-  top: 20%;
-  left: 45%;
+  top: clamp(10%, 15%, 20%);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 100%;
-  height: 400px;
-  max-width: 600px;
+  width: clamp(20rem, 70vw, 40rem);
+  height: max-content;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(16px); /* Required for Safari support */
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 2.5rem;
+  padding: 2rem;
 
   /* Outer drop shadow for elevation + inner glow for the glass edge */
   box-shadow:
@@ -966,38 +898,6 @@ body {
     inset 0 0 20px rgba(23, 233, 224, 0.3);
 }
 
-@media (max-width: 1024px) {
-  .explore {
-    padding: 3rem 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .explore {
-    padding: 1.5rem;
-    /* max-width: 100%; */
-  }
-
-  .explore-title {
-    font-size: 1.3rem;
-  }
-
-  .explore-desc {
-    font-size: 0.8rem;
-  }
-
-  /*   .explore-image-wrapper {
-    max-width: 100%;
-  } */
-}
-
-.explore-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-}
-
 .explore-image-placeholder {
   display: block;
   width: 100%;
@@ -1005,81 +905,17 @@ body {
   background: linear-gradient(135deg, #87ceeb 0%, #e0f6ff 100%);
 }
 
-/* Resort card */
-
-.resort-card {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 0.8rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
-  z-index: 10;
-  max-width: 240px;
-}
-
-.resort-thumb {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #f8c471 0%, #d4a574 100%);
-  flex-shrink: 0;
-}
-
-.resort-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.resort-name {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #0c0c0c;
-}
-
-.resort-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.resort-rating {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.75rem;
-  color: #888;
-}
-
-.resort-rating .star-icon {
-  color: #ffac33;
-}
-
-.resort-price {
-  font-size: 0.75rem;
-  color: #888;
-}
-
-.resort-price span {
-  color: #184a57;
-  font-weight: 600;
-}
-
 .explore-title {
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 700;
   line-height: 1.25;
+  margin-bottom: 1rem;
   color: #ffffff;
 }
 
 .explore-desc {
   line-height: 1.7;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: #f5f3f3;
 }
 
@@ -1089,7 +925,7 @@ body {
   margin-right: 2rem;
   border: none;
   border-radius: 8px;
-  background: #0f313a;
+  background: #155d59;
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
@@ -1099,27 +935,26 @@ body {
 }
 
 .btn-explore:hover {
-  background: #0d2830;
+  background: #104c49;
 }
 
-@media (max-width: 1100px) {
-  .explore {
-    padding: 3rem 4rem;
+@media (max-width: 480px) {
+  .glass-card {
+    max-width: 80vw;
   }
 
-  .explore-container {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
+  .explore-title {
+    font-size: 1.3rem;
   }
 
-  .explore-image-wrapper {
-    max-width: 400px;
+  .explore-desc {
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 768px) {
-  .explore {
-    padding: 2.5rem 1.5rem;
+  .explore-container {
+    min-height: 500px;
   }
 
   .explore-title {
@@ -1129,16 +964,18 @@ body {
   .explore-desc {
     font-size: 0.9rem;
   }
+}
 
-  .resort-card {
-    top: 0.8rem;
-    right: 0.8rem;
-    max-width: 200px;
+@media (max-width: 1100px) {
+  .explore-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    min-height: clamp(500px, 40vh, 700px);
   }
 
-  .guide-badge {
-    bottom: 0.8rem;
-    left: 0.8rem;
+  .explore-desc {
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -1373,7 +1210,8 @@ body {
 /* ─── NUESTRAS PROMOCIONES (3D STACK CAROUSEL) ─────────── */
 
 .promotions-section {
-  padding: 2rem 5rem;
+  padding-top: 2rem;
+  padding-inline: 1.5rem;
   background: #ffffff;
   text-align: center;
   overflow: hidden;
@@ -1381,7 +1219,7 @@ body {
 
 .promotions-section-grid {
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 2fr));
 }
 
 .promotions-section-left {
@@ -1646,14 +1484,6 @@ body {
   justify-content: center;
 }
 
-.lightbox-image-only {
-  max-width: 100%;
-  max-height: 90vh;
-  object-fit: contain;
-  border-radius: 20px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
-}
-
 .lightbox-close-btn {
   position: absolute;
   top: 1.5rem;
@@ -1680,40 +1510,8 @@ body {
 }
 
 /* Media Queries for 3D Stack */
-@media (max-width: 1024px) {
-  .promotions-section {
-    padding: 3.5rem 3rem;
-  }
-}
 
-@media (max-width: 768px) {
-  .promotions-section {
-    padding: 3rem 1.5rem;
-  }
-
-  .stack-nav-btn {
-    display: none;
-  }
-
-  .cards-stack {
-    height: 350px;
-  }
-
-  .stack-card-wrapper {
-    width: 240px;
-    height: 300px;
-  }
-
-  .stack-card-wrapper.left {
-    transform: translate3d(-80px, 0, -80px) scale(0.85);
-  }
-
-  .stack-card-wrapper.right {
-    transform: translate3d(80px, 0, -80px) scale(0.85);
-  }
-}
-
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .promotions-section {
     padding: 2.5rem 1rem;
   }
@@ -1755,4 +1553,37 @@ body {
   .lightbox-backdrop {
     padding: 1rem;
   }
-}
+} */
+
+/* @media (max-width: 768px) {
+  .promotions-section {
+    padding: 3rem 1.5rem;
+  }
+  
+  .stack-nav-btn {
+    display: none;
+  }
+  
+  .cards-stack {
+    height: 350px;
+  }
+
+  .stack-card-wrapper {
+    width: 240px;
+    height: 300px;
+  }
+
+  .stack-card-wrapper.left {
+    transform: translate3d(-80px, 0, -80px) scale(0.85);
+  }
+
+  .stack-card-wrapper.right {
+    transform: translate3d(80px, 0, -80px) scale(0.85);
+  }
+} */
+
+/* @media (max-width: 1024px) {
+  .promotions-section {
+    padding: 3.5rem 3rem;
+  }
+} */

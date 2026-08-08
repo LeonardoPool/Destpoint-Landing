@@ -354,26 +354,28 @@
 <!-- ─── Hero ────────────────────────────────────────────────── -->
 <section class="hero">
   <!-- Left column -->
-  <div class="hero-left">
-    <h1 class="hero-title">El mundo, a tu manera.</h1>
-    <p class="hero-desc">
-      AZUWA Travel es una agencia de viajes especializada en experiencias
-      nacionales e internacionales para parejas, familias, grupos y empresas.
-      Organizamos vacaciones, bodas destino, quince años, lunas de miel,
-      incentivos y convenciones, combinando atención personalizada, tecnología,
-      seguridad y acompañamiento profesional antes, durante y después de cada
-      viaje.
-    </p>
-
-    <div class="follow-us"></div>
-  </div>
-
-  <!-- Right column -->
-  <div class="hero-right">
-    <!-- Main hero image -->
-    <img src={heroImage} alt="Destpoint travel destination" class="hero-img" />
-
-    <!-- Scroll-down circular badge removed from here to make it global floating -->
+  <div class="hero-container">
+    <div class="hero-left">
+      <h1 class="hero-title">El mundo, a tu manera.</h1>
+      <p class="hero-desc">
+        AZUWA Travel es una agencia de viajes especializada en experiencias
+        nacionales e internacionales para parejas, familias, grupos y empresas.
+        Organizamos vacaciones, bodas destino, quince años, lunas de miel,
+        incentivos y convenciones, combinando atención personalizada,
+        tecnología, seguridad y acompañamiento profesional antes, durante y
+        después de cada viaje.
+      </p>
+    </div>
+    <!-- Right column -->
+    <div class="hero-right">
+      <!-- Main hero image -->
+      <img
+        src={heroImage}
+        alt="Destpoint travel destination"
+        class="hero-img"
+      />
+      <!-- Scroll-down circular badge removed from here to make it global floating -->
+    </div>
   </div>
 </section>
 
@@ -712,7 +714,9 @@
 
 <style>
   .booking-soon-section {
-    padding: 10rem 5rem;
+    padding-top: 4rem;
+    padding-inline: 0rem;
+    padding-bottom: 2rem;
     background-color: #f4fafd;
 
     /* Overlapping radial gradients to create an organic, painted feel */
@@ -747,29 +751,30 @@
     text-align: center;
   }
 
-  @media (max-width: 1024px) {
-    .booking-soon-section {
-      padding: 3rem 3rem 1rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .booking-soon-section {
-      padding: 2rem 1.5rem 0.5rem;
-    }
-  }
-
   .booking-soon-container {
+    padding: 3rem 2rem;
     width: 100%;
     height: 100%;
   }
 
   .booking-soon-title {
-    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-size: 1.6rem;
     font-weight: 700;
     color: #01173b;
-    margin-bottom: 3rem;
+    margin-bottom: clamp(1rem, 2rem, 2.2rem);
     letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .booking-soon-section {
+      padding-top: 8rem;
+      min-height: clamp(500px, 40vh, 45vh);
+    }
+
+    .booking-soon-title {
+      margin-bottom: 2rem;
+      font-size: clamp(1.6rem, 2.8rem, 3rem);
+    }
   }
 
   .search-mockup-wrapper {
@@ -801,13 +806,13 @@
     user-select: none;
   }
 
-  @media (max-width: 768px) {
+  /*   @media (max-width: 768px) {
     .search-engine-mockup {
       grid-template-columns: 1fr;
       text-align: left;
       padding: 1.5rem;
     }
-  }
+  } */
 
   .search-field {
     display: flex;
@@ -817,13 +822,13 @@
     border-right: 1px solid #e2e8f0;
   }
 
-  @media (max-width: 768px) {
+  /*   @media (max-width: 768px) {
     .search-field {
       border-right: none;
       border-bottom: 1px solid #e2e8f0;
       padding: 0.5rem 0;
     }
-  }
+  } */
 
   .field-icon-label {
     display: flex;
